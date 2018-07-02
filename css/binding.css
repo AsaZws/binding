@@ -1,0 +1,398 @@
+/* base 公共样式 */
+html, body, header, div, h1, h2, h3, h4, form, input, p, img, ul, li, a, span, i, strong { padding: 0; margin: 0; }
+
+html, body {
+    font-size: 50px;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    font-family: 'Microsoft YaHei';
+    line-height: 1;
+    min-width: 320px;
+    background-color: #f0f0f0;
+}
+
+ul, li {
+    list-style: none;
+}
+
+i {
+    font-style: normal;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+img {
+    border: 0;
+}
+
+input {
+    outline: none;
+    border: none;
+}
+
+/* header部分 */
+header {
+    width: 100%;
+    font-size: 0;
+    text-align: center;
+    font-family: 'Microsoft YaHei';
+}
+header .top {
+    width: 100%;
+    height: 1.28rem;
+    background-color: #1c1c20;
+}
+header h1 img {
+    width: 100%;
+    height: 2.8rem;
+}
+
+section {
+    padding: 0 0.4rem;
+    font-size: 0;
+    font-family: 'Microsoft YaHei';
+}
+.plate {
+    height: 1.1rem;
+    margin-top: -0.4rem;
+    overflow: hidden;
+}
+.plate ul {
+    height: 1.1rem;
+    display: flex;
+    justify-content: center;
+}
+.plate li {
+    width: 0.76rem;
+    height: 1.06rem;
+    line-height: 1.06rem;
+    border: 0.02rem solid #eee;
+    margin-right: -0.02rem;
+    background-color: #fff;
+    font-size: 0.36rem;
+    text-align: center;
+}
+.plate .active {
+    border: 0.02rem solid #1aad19;
+    z-index: 99;
+}
+/* 新能源车牌号 */
+/* .plate li:nth-last-child(1) {
+    font-size: 0.36rem;
+    height: 1.06rem;
+} */
+.plate li .new {
+    color: #888;
+    /* display: none; */
+}
+.plate li:nth-last-child(1) span {
+    display: block;
+    width: 0.26rem;
+    height: 0.26rem;
+    line-height: 0.2rem;
+    font-size: 0.2rem;
+    border: 0.01rem solid #888;
+    border-radius: 50%;
+    margin: 0.24rem auto 0;
+}
+.plate li:nth-last-child(1) i {
+    display: block;
+    font-size: 0.2rem;
+    line-height: 0.4rem;
+    margin-bottom: 0.2rem;
+}
+.plate li:nth-child(2) {
+    margin-right: 0.4rem;
+}
+
+footer {
+    width: 100%;
+    font-size: 0;
+    font-family: 'Microsoft YaHei';
+}
+/* 键盘 */
+.keyboard {
+    /* height: 5.4rem; */
+    background-color: #eceef1;
+    position: absolute;
+    bottom: 0;
+    /* display: none; */
+}
+.keyboard .shut {
+    height: 0.54rem;
+    line-height: 0.54rem;
+    text-align: right;
+    padding: 0 0.16rem;
+    font-size: 0.28rem;
+    background-color: #f9f9f9;
+    color: #333;
+    border-bottom: 0.01rem solid #ddd;
+    border-top: 0.01rem solid #eee;
+}
+.keyboard ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0.16rem 0.08rem 0;
+}
+.keyboard li {
+    /* width: 0.66rem; */
+    width: 9%;
+    height: 0.96rem;
+    line-height: 0.96rem;
+    text-align: center;
+    border-radius: 0.16rem;
+    background-color: #fff;
+    font-size: 0.32rem;
+    color: #333;
+    margin: 0 0.08rem 0.16rem 0;
+    box-shadow: 0 0.04rem 0 #aaa;
+}
+.keyboard li:nth-child(10n) {
+    margin-right: 0;
+}
+.keyboard li:nth-last-child(1) {
+    width: 1.04rem;
+}
+
+/* 地区简称的键盘 */
+.area {
+    width: 100%;
+    background-color: #eceef1;
+    position: absolute;
+    bottom: 0;
+    display: none;
+}
+.area .shut {
+    height: 0.54rem;
+    line-height: 0.54rem;
+    text-align: right;
+    padding: 0 0.16rem;
+    font-size: 0.28rem;
+    background-color: #f9f9f9;
+    color: #333;
+    border-bottom: 0.01rem solid #ddd;
+    border-top: 0.01rem solid #eee;
+}
+.area ul {
+    padding: 0.16rem 0.08rem 0;
+}
+.area .area-one, .area .area-tow, .area .area-three, .area .area-four {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.area li {
+    /* width: 0.66rem; */
+    width: 9%;
+    height: 0.96rem;
+    line-height: 0.96rem;
+    text-align: center;
+    border-radius: 0.16rem;
+    background-color: #fff;
+    font-size: 0.32rem;
+    color: #333;
+    margin: 0 0.08rem 0.16rem 0;
+    box-shadow: 0 0.04rem 0 #aaa;
+}
+.area li:nth-child(10n) {
+    margin-right: 0;
+}
+/* .area .area-four li:nth-last-child(1) {
+    width: 1.04rem;
+} */
+
+/* 手机屏幕小于370px的屏幕 */
+@media screen and ( min-width: 450px ) {
+    .keyboard li, .area li {
+        width: 0.66rem;
+    }
+}
+/* 手机屏幕小于370px的屏幕 */
+@media screen and ( max-width: 370px ) {
+    .keyboard li, .area li {
+        /* width: 0.54rem; */
+        width: 8%;
+        height: 0.8rem;
+        line-height: 0.8rem;
+    }
+    .plate li:nth-child(2) {
+        margin-right: 0.1rem;
+    }
+    .plate li {
+        width: 0.66rem;
+    }
+    .plate li:nth-last-child(1) span {
+        display: block;
+        line-height: 0.2rem;
+        margin: 0.1rem auto 0;
+    }
+    .plate li:nth-last-child(1) i {
+        display: block;
+        font-size: 0.2rem;
+        line-height: 0.32rem;
+        /* margin-bottom: 0.2rem; */
+    }
+}
+
+/* 查询缴费 */
+section .binding {
+    width: 100%;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    margin-top: 1.04rem;
+    text-align: center;
+    font-size: 0.40rem;
+    color: #fff;
+    border-radius: 0.16rem;
+    background-color: #1aad19;
+    /* opacity: 0.5; */
+}
+
+/* 不足15分钟 */
+section .plate-not {
+    font-size: 0.32rem;
+    line-height: 1.6rem;
+    text-align: center;
+    color: #888;
+}
+
+/* 弹出框背景变灰色 */
+.poplayer3 {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
+    z-index: 99;
+    background-color: #333;
+    -moz-opacity: 0.6;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    display: none;
+}
+/*  缴费详情 */
+.detail3 {
+    width: 5.42rem;
+    height: 7.68rem;
+    background-color: #fff;
+    color: #333;
+    border-radius: 0.16rem;
+    left: 50%;
+    top: 50%;
+    margin-left: -2.95rem;
+    margin-top: -3.68rem;
+    position: fixed;
+    z-index: 100;
+    display: none;
+    padding: 0 0.24rem;
+}
+.detail3 strong {
+    width: 0.56rem;
+    height: 0.56rem;
+    line-height: 0.56rem;
+    border: 0.01rem solid #e64340;
+    border-radius: 50%;
+    text-align: center;
+    position: absolute;
+    top: 0.12rem;
+    right: 0.12rem;
+    font-size: 0.32rem;
+    color: #e64340;
+    text-align: center;
+}
+.detail3 h3 {
+    font-size: 0.36rem;
+    text-align: center;
+    margin-top: 0.48rem;
+}
+/* 缴费信息 */
+.detail3 ul {
+    margin: 0.8rem 0.24rem 0 0.24rem;
+    border-bottom: 0.01rem solid #ccc;
+    padding-bottom: 0.48rem;
+}
+.detail3 li span {
+    font-size: 0.28rem;
+    line-height: 0.48rem;
+    color: #666;
+}
+.detail3 li i {
+    font-size: 0.28rem;
+    line-height: 0.48rem;
+    margin-left: 1.2rem;
+}
+.detail3 .wechat {
+    width: 100%;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    margin-top: 0.8rem;
+    text-align: center;
+    font-size: 0.40rem;
+    color: #fff;
+    border-radius: 0.16rem;
+    background-color: #1aad19;
+    /* opacity: 0.5; */
+}
+.detail3 .alipay {
+    width: 100%;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    margin-top: 0.4rem;
+    text-align: center;
+    font-size: 0.40rem;
+    color: #fff;
+    border-radius: 0.16rem;
+    background-color: #108ee9;
+    /* opacity: 0.5; */
+}
+
+/* 缴费成功 */
+.payment {
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 0.16rem;
+    margin-top: 0.24rem;
+    padding: 0.24rem;
+}
+/* 缴费信息 */
+.payment ul {
+    margin: 0.48rem 0.4rem 0 0.4rem;
+    border-bottom: 0.01rem solid #ccc;
+    padding-bottom: 0.48rem;
+}
+.payment h4 {
+    font-size: 0.32rem;
+    line-height: 0.8rem;
+    color: #666;
+}
+.payment h4 em {
+    font-style: normal;
+    font-size: 0.4rem;
+    color: #e64340;
+}
+.payment strong {
+    font-size: 0.28rem;
+    line-height: 0.48rem;
+    color: #e64340;
+}
+.payment li span {
+    font-size: 0.28rem;
+    line-height: 0.48rem;
+    color: #666;
+}
+.payment li i {
+    font-size: 0.28rem;
+    line-height: 0.48rem;
+    margin-left: 0.8rem;
+}
+.payment p {
+    /* text-align: right; */
+    font-size: 0.24rem;
+    line-height: 0.48rem;
+    color: #aaa;
+}
