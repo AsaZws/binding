@@ -1,0 +1,117 @@
+
+/* 父级基础字号 */
+.keyboard-footer {
+    font-size: 16px;
+}
+/* 数字拼音键盘 */
+.keyboard {
+    /* height: 5.4rem; */
+    background-color: #eceef1;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 99;
+    display: none;
+}
+.keyboard .shut {
+    height: 2em;
+    line-height: 2em;
+    text-align: right;
+    padding: 0 0.5em;
+    font-size: 0.875em;
+    background-color: #f9f9f9;
+    color: #333;
+    border-bottom: 0.03125em solid #ddd;
+    border-top: 0.03125em solid #eee;
+}
+.keyboard ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0.5em 0.25em 0;
+    list-style: none;
+}
+.keyboard li {
+    /* width: 0.66rem; */
+    width: 9%;
+    height: 3em;
+    line-height: 3em;
+    text-align: center;
+    border-radius: 0.5em;
+    background-color: #fff;
+    font-size: 1em;
+    color: #333;
+    margin: 0 0.25em 0.5em 0;
+    box-shadow: 0 0.125em 0 #aaa;
+    list-style: none;
+}
+.keyboard li:nth-child(10n) {
+    margin-right: 0;
+}
+.keyboard li:nth-last-child(1) {
+    width: 3.25em;
+}
+
+/* 地区简称的键盘 */
+.area {
+    width: 100%;
+    background-color: #eceef1;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 99;
+    /* display: none; */
+}
+.area .shut {
+    height: 2em;
+    line-height: 2em;
+    text-align: right;
+    padding: 0 0.5em;
+    font-size: 0.875em;
+    background-color: #f9f9f9;
+    color: #333;
+    border-bottom: 0.03125em solid #ddd;
+    border-top: 0.03125em solid #eee;
+}
+.area ul {
+    padding: 0.5em 0.25em 0;
+    list-style: none;
+}
+.area .area-one, .area .area-tow, .area .area-three, .area .area-four {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.area li {
+    /* width: 0.66rem; */
+    width: 9%;
+    height: 3em;
+    line-height: 3em;
+    text-align: center;
+    border-radius: 0.5em;
+    background-color: #fff;
+    font-size: 1em;
+    color: #333;
+    margin: 0 0.25em 0.5em 0;
+    box-shadow: 0 0.125em 0 #aaa;
+    list-style: none;
+}
+.area li:nth-child(10n) {
+    margin-right: 0;
+}
+
+/* 手机屏幕大于450的屏幕 */
+@media screen and ( min-width: 450px ) {
+    .keyboard li, .area li {
+        width: 2.0625em;
+    }
+}
+/* 手机屏幕小于370px的屏幕 */
+@media screen and ( max-width: 370px ) {
+    .keyboard li, .area li {
+        /* width: 0.54rem; */
+        width: 8.8%;
+        height: 2.5em;
+        line-height: 2.5em;
+    }
+}
