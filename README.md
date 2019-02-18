@@ -1,4 +1,4 @@
-车牌键盘框：https://asazws.github.io/binding/binding.html
+车牌键盘框：https://asazws.github.io/binding/binding.html  
 车牌键盘输入框：https://asazws.github.io/binding/input1.4/binding.html
 
 # binding
