@@ -13,7 +13,10 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/binding.js"></script>
     <style>
-        
+        * {
+            padding: 0;
+            margin: 0;
+        }
         /* header部分 */
         header {
             width: 100%;
@@ -58,57 +61,62 @@
     <section>
         <div class="plate">
             <form>
-                <input type="text" name="请输入车牌" placeholder="请输入车牌" maxlength="7" id="plate">
+                <input readonly type="text" placeholder="请输入车牌" maxlength="8" id="plate" value="粤B">
             </form>
         </div>
     </section>
     <div class="keyboard-footer">
-        <!-- 键盘 -->
+        <!-- 数字字母键盘 -->
         <div class="keyboard" id="shutkey">
             <div class="shut" id="shut">关闭</div>
             <ul id="keyboard">
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-                <li>8</li>
-                <li>9</li>
-                <li>0</li>
-
-                <li>Q</li>
-                <li>W</li>
-                <li>E</li>
-                <li>R</li>
-                <li>T</li>
-                <li>Y</li>
-                <li>U</li>
-                <li>P</li>
-                <li>港</li>
-                <li>澳</li>
-                
-                <li>A</li>
-                <li>S</li>
-                <li>D</li>
-                <li>F</li>
-                <li>G</li>
-                <li>H</li>
-                <li>J</li>
-                <li>K</li>
-                <li>L</li>
-                <li>学</li>
-                
-                <li>Z</li>
-                <li>X</li>
-                <li>C</li>
-                <li>V</li>
-                <li>B</li>
-                <li>N</li>
-                <li>M</li>
-                <li>警</li>
-                <p class="delet" id="delet">删除</p>
+                <div class="area-one">
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                    <li>0</li>
+                </div>
+                <div class="area-one">
+                    <li>Q</li>
+                    <li>W</li>
+                    <li>E</li>
+                    <li>R</li>
+                    <li>T</li>
+                    <li>Y</li>
+                    <li>U</li>
+                    <li>P</li>
+                    <li>港</li>
+                    <li>澳</li>
+                </div>
+                <div class="area-one">
+                    <li>A</li>
+                    <li>S</li>
+                    <li>D</li>
+                    <li>F</li>
+                    <li>G</li>
+                    <li>H</li>
+                    <li>J</li>
+                    <li>K</li>
+                    <li>L</li>
+                    <li>学</li>
+                </div>
+                <div class="area-one">
+                    <li>Z</li>
+                    <li>X</li>
+                    <li>C</li>
+                    <li>V</li>
+                    <li>B</li>
+                    <li>N</li>
+                    <li>M</li>
+                    <li>警</li>
+                    <p class="delet" id="delet">删除</p>
+                </div>
             </ul>
         </div>
         <!-- 地区车牌简称 -->
@@ -127,7 +135,7 @@
                     <li>桂</li>
                     <li>黑</li>
                 </div>
-                <div class="area-tow">
+                <div class="area-one">
                     <li>吉</li>
                     <li>辽</li>
                     <li>晋</li>
@@ -138,7 +146,7 @@
                     <li>苏</li>
                     <li>皖</li>
                 </div>
-                <div class="area-three">
+                <div class="area-one">
                     <li>浙</li>
                     <li>闽</li>
                     <li>赣</li>
@@ -148,7 +156,7 @@
                     <li>琼</li>
                     <li>甘</li>
                 </div>
-                <div class="area-four">
+                <div class="area-one">
                     <li>陕</li>
                     <li>贵</li>
                     <li>云</li>

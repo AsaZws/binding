@@ -1,74 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,user-scalable=1.0,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="screen-orientation" content="portrait"><!-- uc强制竖屏 -->
-    <meta name="x5-orientation" content="portrait"><!-- QQ强制竖屏 -->
-    <meta name="apple-mobile-web-app-capable" content="yes" >
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>停车缴费</title>
-    <link rel="stylesheet" href="css/binding.css">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/binding.js"></script>
-</head>
-<body>
-    <header>
-        <div class="top"></div>
-        <h1><img src="images/banner1.jpg" alt="前海SPOM"></h1>
-    </header>
-    <section>
-        <div class="plate">
-            <ul id="plate">
-                <li>粤</li>
-                <li>B</li>
-                <li class="active"></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li>
-                    <div class="new">
-                        <span>+</span>
-                        <i>新能源</i>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <input type="submit" value="查询缴费" class="binding" id="binding">
-        <div class="detail3" id="detail3">
-            <strong id="CancelParking3">X</strong>
-            <h3>缴费信息</h3>
-            <!-- 缴费信息 -->
-            <ul>
-                <li>
-                    <span>手机号码：</span>
-                    <i>18888888888</i>
-                </li>
-                <li>
-                    <span>车牌号码：</span>
-                    <i id="platenum">粤B8888K</i>
-                </li>
-                <li>
-                    <span>停车时长：</span>
-                    <i>4小时</i>
-                </li>
-                <li>
-                    <span>停车费用：</span>
-                    <i>20元</i>
-                </li>
-            </ul>
-            <input type="submit" value="微信支付" class="wechat" onClick=window.location.href="select-payment.html">
-            <input type="submit" value="银行卡支付" class="alipay">
-        </div>
-        <div class="poplayer3" id="poplayer3"></div>
-    </section>
-    <footer>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta name="flexible" content="initial-dpr=2" />
+    <title>输入车牌</title>
+    <!-- 车牌数字键盘 -->
+    <link rel="stylesheet" href="css/binding.css" />
+    <style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    ul, li {
+        list-style: none;
+    }
+    .plate {
+        margin-top: 40px;
+    }
+    </style>
+  </head>
+
+  <body>
+    <!-- 车牌 -->
+    <div class="plate">
+      <ul id="plate">
+        <li>粤</li>
+        <li>B</li>
+        <li class="active"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li>
+          <div class="new"><span>+</span> <i>新能源</i></div>
+        </li>
+      </ul>
+    </div>
+    <!-- 虚拟键盘 -->
+    <div class="keyboard-footer">
         <!-- 键盘 -->
         <div class="keyboard" id="shutkey">
-            <div class="shut" id="shut">关闭</div>
-            <ul id="keyboard">
+          <div class="shut" id="shut">关闭</div>
+          <ul id="keyboard">
+              <div class="area-one">
                 <li>1</li>
                 <li>2</li>
                 <li>3</li>
@@ -79,7 +57,8 @@
                 <li>8</li>
                 <li>9</li>
                 <li>0</li>
-
+              </div>
+              <div class="area-one">
                 <li>Q</li>
                 <li>W</li>
                 <li>E</li>
@@ -90,7 +69,8 @@
                 <li>P</li>
                 <li>港</li>
                 <li>澳</li>
-                
+              </div>
+              <div class="area-one">
                 <li>A</li>
                 <li>S</li>
                 <li>D</li>
@@ -101,7 +81,8 @@
                 <li>K</li>
                 <li>L</li>
                 <li>学</li>
-                
+              </div>
+              <div class="area-one">
                 <li>Z</li>
                 <li>X</li>
                 <li>C</li>
@@ -110,55 +91,59 @@
                 <li>N</li>
                 <li>M</li>
                 <li>警</li>
-                <li>删除</li>
-            </ul>
+                <li class="delet">删除</li>
+              </div>
+          </ul>
         </div>
         <!-- 地区车牌简称 -->
         <div class="area" id="area">
-            <div class="shut" id="shuta">关闭</div>
-            <ul id="keyboarda">
-                <div class="area-one">
-                    <li>京</li>
-                    <li>津</li>
-                    <li>沪</li>
-                    <li>渝</li>
-                    <li>蒙</li>
-                    <li>新</li>
-                    <li>藏</li>
-                    <li>宁</li>
-                    <li>桂</li>
-                    <li>黑</li>
-                </div>
-                <div class="area-tow">
-                    <li>吉</li>
-                    <li>辽</li>
-                    <li>晋</li>
-                    <li>冀</li>
-                    <li>青</li>
-                    <li>鲁</li>
-                    <li>豫</li>
-                    <li>苏</li>
-                    <li>皖</li>
-                </div>
-                <div class="area-three">
-                    <li>浙</li>
-                    <li>闽</li>
-                    <li>赣</li>
-                    <li>湘</li>
-                    <li>鄂</li>
-                    <li>粤</li>
-                    <li>琼</li>
-                    <li>甘</li>
-                </div>
-                <div class="area-four">
-                    <li>陕</li>
-                    <li>贵</li>
-                    <li>云</li>
-                    <li>川</li>
-                    <!-- <li>删除</li> -->
-                </div>
-            </ul>
+          <div class="shut" id="shuta">关闭</div>
+          <ul id="keyboarda">
+            <div class="area-one">
+              <li>京</li>
+              <li>津</li>
+              <li>沪</li>
+              <li>渝</li>
+              <li>蒙</li>
+              <li>新</li>
+              <li>藏</li>
+              <li>宁</li>
+              <li>桂</li>
+              <li>黑</li>
+            </div>
+            <div class="area-one">
+              <li>吉</li>
+              <li>辽</li>
+              <li>晋</li>
+              <li>冀</li>
+              <li>青</li>
+              <li>鲁</li>
+              <li>豫</li>
+              <li>苏</li>
+              <li>皖</li>
+            </div>
+            <div class="area-one">
+              <li>浙</li>
+              <li>闽</li>
+              <li>赣</li>
+              <li>湘</li>
+              <li>鄂</li>
+              <li>粤</li>
+              <li>琼</li>
+              <li>甘</li>
+            </div>
+            <div class="area-one">
+              <li>陕</li>
+              <li>贵</li>
+              <li>云</li>
+              <li>川</li>
+              <!-- <li>删除</li> -->
+            </div>
+          </ul>
         </div>
-    </footer>
-</body>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/binding.js"></script>
+  </body>
 </html>
