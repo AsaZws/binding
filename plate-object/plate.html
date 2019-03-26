@@ -8,7 +8,7 @@
     <meta name="x5-orientation" content="portrait"><!-- QQ强制竖屏 -->
     <meta name="apple-mobile-web-app-capable" content="yes" >
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>停车缴费</title>
+    <title>输入车牌</title>
     <link rel="stylesheet" href="css/plate.css">
     <script src="js/plate.js"></script>
     <style>
@@ -52,6 +52,11 @@
             font-weight: 100;
         }
     </style>
+    <script>
+    window.onload = function(){
+        var tab1 = new Plate("plate");
+    }
+    </script>
 </head>
 <body>
     <header>
