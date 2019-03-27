@@ -6,19 +6,22 @@ data：2019/3/25修改
 'use strict';
 // 车牌键盘数组
 var Keyboard = {
-        Place_name : ["京","津","沪","渝","蒙","新","藏","宁","桂","黑","吉","辽","晋","冀","青","鲁","豫","苏","皖","浙","闽","赣","湘","鄂","粤","琼","甘","陕","贵","云","川"],
+        Place_name : [["京","津","沪","渝","蒙","新","藏","宁","桂","黑"],["吉","辽","晋","冀","青","鲁","豫","苏","皖","浙"],["闽","赣","湘","鄂","粤","琼","甘","陕","贵","云"],["川"]],
+        // Place_name : ["京","津","沪","渝","蒙","新","藏","宁","桂","黑","吉","辽","晋","冀","青","鲁","豫","苏","皖","浙","闽","赣","湘","鄂","粤","琼","甘","陕","贵","云","川"],
         Letter: ["1","2","3","4","5","6","7","8","9","0","Q","W","E","R","T","Y","U","I","o","P","港","澳","A","S","D","F","G","H","J","K","L","学","Z","X","C","V","B","N","M","警"],
 
 }
 var oLi = "";
+var oo = "";
 for (var i in Keyboard.Place_name) {
-    oLi += "<li>" + Keyboard.Place_name[i] + "</li>";
-    if (i%10 == 0) {
-        oLi += "</ul><ul>"
+    for (var j in Keyboard.Place_name[i]) {
+        oo += "<li>" + Keyboard.Place_name[i][j] + "</li>";
     }
+    oLi += "<ul>" + Keyboard.Place_name[i] + "</ul>";
 }
-oLi = "<ul>" + oLi + "</ul>"
-console.log(oLi)
+// oLi = "<ul>" + oLi + "</ul>";
+oLi += "<ul>" + oo + "</ul>";
+console.log(oLi);
 // 获取元素
 function Plate(id) {
     var _Okeyboard = '<div class="keyboard"> \
@@ -30,9 +33,9 @@ function Plate(id) {
                         <ul></ul> \
                     </div> \
                  </div>';
-    var Oplate = document.getElementById(id);                           // 获取对象
+    var Oplate = document.getElementById(id);                              // 获取对象
     this.Ovalue = Oplate.getElementsByTagName("input")[0];                 // 获取输入框
-    this.Okeyboard = Oplate.getElementsByClassName("keyboard");         // 获取键盘
+    this.Okeyboard = Oplate.getElementsByClassName("keyboard");            // 获取键盘
     // this.Oplace_name = Okeyboard.getElementsByClassName("place-name");  // 获取地名键盘
     // this.Oletter = Okeyboard.getElementsByClassName("letter");          // 获取数字字母键盘
     // this.Oshut_down = Okeyboard.getElementsByClassName("shut-down");    // 获取关闭
