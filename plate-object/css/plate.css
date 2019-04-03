@@ -32,10 +32,6 @@ data：2019/3/8修改
     margin-bottom: 0.8em;
     cursor: pointer;
 }
-/* .keyboard .place-name {
-    padding: 0.5em 0.25em 0;
-    list-style: none;
-} */
 /* 数字字母键盘和地区简称键盘的每个按键样式 */
 .keyboard .place-name li {
     text-align: center;
@@ -47,8 +43,7 @@ data：2019/3/8修改
     margin: 0 0.25em 0.5em 0;
     box-shadow: 0 0.125em 0 #aaa;
     list-style: none;
-    cursor: pointer;
-    
+    cursor: pointer; 
 }
 .keyboard .place-name li:active {
     background: #999;

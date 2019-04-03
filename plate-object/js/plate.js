@@ -15,7 +15,8 @@ var Place_name = [["京","津","沪","渝","蒙","新","藏","宁","桂","黑"],
 var Letter = [["1","2","3","4","5","6","7","8","9","0"],["Q","W","E","R","T","Y","U","P","港","澳"],["A","S","D","F","G","H","J","K","L","学"],["Z","X","C","V","B","N","M","警","删除"]];
 
 var oLi = '';
-function Cyclic_Li(arr) {
+var str = '';
+function Cyclic_Li(oLi, arr) {
     for (var i in arr) {
         for (var j in arr[i]) {
             oLi += "<li>" + arr[i][j] + "</li>";
@@ -24,15 +25,15 @@ function Cyclic_Li(arr) {
             }
         }
     }
-    oLi = "<ul>" + oLi + "</ul>";
+    str = "<ul>" + oLi + "</ul>";
 }
-Cyclic_Li(Letter);
+Cyclic_Li(str, Letter);
 // 获取元素
 function Plate(id) {
     var _Okeyboard = '<div class="keyboard"> \
                     <div class="shut-down">关闭</div> \
-                    <div class="place-name"> '
-                    + oLi +
+                    <div class="place-name">'
+                    + str +
                     '</div> \
                     <div class="letter"> \
                         <ul></ul> \
