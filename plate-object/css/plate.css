@@ -51,6 +51,9 @@ data：2019/3/8修改
 .keyboard .place-name li:nth-child(10n) {
     margin-right: 0;
 }
+.keyboard .place-name .lastli {
+    padding: 0.86em 0.68em;
+}
 .keyboard .delet {
     width: 3.25em;
 }
