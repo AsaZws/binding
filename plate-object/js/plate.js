@@ -21,7 +21,7 @@ function Cyclic_Li(oLi, arr) {
     }
     str = "<ul>" + oLi + "</ul>";
 }
-// 获取元素
+// 获取元素dom
 function Plate(id) {
     this.Oplate = document.getElementById(id);                              // 获取对象
     this.Ovalue = this.Oplate.getElementsByTagName("input")[0];             // 获取输入框
@@ -31,17 +31,11 @@ function Plate(id) {
     } else {
         Cyclic_Li(str, Letter);
     }
-    var _Okeyboard = '<div class="keyboard"> \
-                    <div class="shut-down">关闭</div> \
-                    <div class="place-name">'
-                    + str +
-                    '</div> \
-                 </div>';
-    // this.Oplace_name = Okeyboard.getElementsByClassName("place-name");  // 获取地名键盘
-    // this.Oletter = Okeyboard.getElementsByClassName("letter");          // 获取数字字母键盘
-
-    // Oplate.insertAdjacentHTML("afterBegin", _Okeyboard);
-    this.Oplate.innerHTML = this.Oplate.innerHTML + _Okeyboard;
+    var _Okeyboard ='<div class="keyboard"> \
+                        <div class="shut-down">关闭</div> \
+                        <div class="place-name">' + str + '</div> \
+                    </div>';
+    this.Oplate.innerHTML = this.Oplate.innerHTML + _Okeyboard;              // 赋值dome
     this.Okeyboard = this.Oplate.getElementsByClassName("keyboard")[0];      // 渲染完成获取键盘
     this.PlaceNameLastLi = this.Oplate.getElementsByClassName("place-name")[0].lastChild.lastChild;
     this.PlaceNameLastLi.className = "lastli";
@@ -49,11 +43,19 @@ function Plate(id) {
     // 保存this
     var _this = this;
     this.Oshut_down.onclick = function () {
-        _this.OkeyboardClick();
+        _this.HiddenKeyboard();
+    }
+    console.log(this.Ovalue) 
+    _this.onclick = function () {
+        _this.DisplayKeyboard();
     }
 }
-// 点击
-Plate.prototype.OkeyboardClick = function() {
-    console.log(this.Okeyboard)
+// 点击隐藏键盘
+Plate.prototype.HiddenKeyboard = function() {
     this.Okeyboard.style.display = 'none';
+}
+// 点击显示键盘
+Plate.prototype.DisplayKeyboard = function() {
+    console.log(this)
+    this.Okeyboard.style.display = 'block';
 }
