@@ -40,8 +40,7 @@ function Plate(id) {
     // this.Oplace_name = Okeyboard.getElementsByClassName("place-name");  // 获取地名键盘
     // this.Oletter = Okeyboard.getElementsByClassName("letter");          // 获取数字字母键盘
 
-    // Oplate.insertAdjacentHTML("afterBegin", _Okeyboard);
-    this.Oplate.innerHTML = this.Oplate.innerHTML + _Okeyboard;
+    this.Oplate.insertAdjacentHTML("afterBegin", _Okeyboard);
     this.Okeyboard = this.Oplate.getElementsByClassName("keyboard")[0];      // 渲染完成获取键盘
     this.PlaceNameLastLi = this.Oplate.getElementsByClassName("place-name")[0].lastChild.lastChild;
     this.PlaceNameLastLi.className = "lastli";
@@ -51,9 +50,14 @@ function Plate(id) {
     this.Oshut_down.onclick = function () {
         _this.OkeyboardClick();
     }
+    this.Ovalue.onclick = function(){
+        _this.OvalueClick();
+    }
 }
 // 点击
 Plate.prototype.OkeyboardClick = function() {
-    console.log(this.Okeyboard)
     this.Okeyboard.style.display = 'none';
+}
+Plate.prototype.OvalueClick = function() {
+    this.Okeyboard.style.display = 'block';
 }
