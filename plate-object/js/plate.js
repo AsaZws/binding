@@ -21,7 +21,7 @@ function Cyclic_Li(oLi, arr) {
     }
     str = "<ul>" + oLi + "</ul>";
 }
-// 获取元素
+// 获取元素dom
 function Plate(id) {
     this.Oplate = document.getElementById(id);                              // 获取对象
     this.Ovalue = this.Oplate.getElementsByTagName("input")[0];             // 获取输入框
@@ -36,7 +36,7 @@ function Plate(id) {
                     <div class="place-name">'
                     + str +
                     '</div> \
-                 </div>';
+                    </div>';
     // this.Oplace_name = Okeyboard.getElementsByClassName("place-name");  // 获取地名键盘
     // this.Oletter = Okeyboard.getElementsByClassName("letter");          // 获取数字字母键盘
 
@@ -48,16 +48,17 @@ function Plate(id) {
     // 保存this
     var _this = this;
     this.Oshut_down.onclick = function () {
-        _this.OkeyboardClick();
+        _this.HiddenKeyboard();
     }
     this.Ovalue.onclick = function(){
         _this.OvalueClick();
     }
 }
-// 点击
+// 点击隐藏键盘
 Plate.prototype.OkeyboardClick = function() {
     this.Okeyboard.style.display = 'none';
 }
+// 点击打开键盘
 Plate.prototype.OvalueClick = function() {
     this.Okeyboard.style.display = 'block';
 }
