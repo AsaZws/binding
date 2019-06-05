@@ -25,8 +25,9 @@ function Cyclic_Li(oLi, arr) {
 function Plate(id) {
     this.Oplate = document.getElementById(id);                              // 获取对象
     this.Ovalue = this.Oplate.getElementsByTagName("input")[0];             // 获取输入框
+    var ostr = this.Ovalue.value;  // 输入框的车牌
     // 获取输入框的内容来决定渲染哪个键盘
-    if(this.Ovalue.value.length < 1) {
+    if(ostr.length < 1) {
         Cyclic_Li(str, Place_name);
     } else {
         Cyclic_Li(str, Letter);
@@ -37,28 +38,46 @@ function Plate(id) {
                     + str +
                     '</div> \
                     </div>';
-    // this.Oplace_name = Okeyboard.getElementsByClassName("place-name");  // 获取地名键盘
-    // this.Oletter = Okeyboard.getElementsByClassName("letter");          // 获取数字字母键盘
 
-    this.Oplate.insertAdjacentHTML("afterBegin", _Okeyboard);
-    this.Okeyboard = this.Oplate.getElementsByClassName("keyboard")[0];      // 渲染完成获取键盘
-    this.PlaceNameLastLi = this.Oplate.getElementsByClassName("place-name")[0].lastChild.lastChild;
-    this.PlaceNameLastLi.className = "lastli";
-    this.Oshut_down = this.Oplate.getElementsByClassName("shut-down")[0];    // 获取关闭
-    // 保存this
-    var _this = this;
-    this.Oshut_down.onclick = function () {
-        _this.HiddenKeyboard();
+    this.Oplate.insertAdjacentHTML("afterBegin", _Okeyboard);                                           // 渲染完整的dom
+    this.Okeyboard = this.Oplate.getElementsByClassName("keyboard")[0];                                 // 渲染完成获取键盘
+    this.PlaceNameLastLi = this.Oplate.getElementsByClassName("place-name")[0].lastChild.lastChild;     // 获取回删
+    this.PlaceNameLastLi.className = "lastli";                                                          // 给回删添加class
+    this.PlaceNameLi = this.Oplate.getElementsByClassName("place-name")[0].getElementsByTagName('li');  // 获取所有li
+
+    this.Oshut_down = this.Oplate.getElementsByClassName("shut-down")[0];                               // 获取关闭
+    this.Oplace_name = this.Oplate.getElementsByClassName("place-name")[0];                             // 获取键盘
+
+    var _this = this;                             // 保存this
+    this.Oshut_down.onclick = function () {       // 给关闭按钮添加点击事件
+        _this.hiddenKeyboard();
     }
-    this.Ovalue.onclick = function(){
-        _this.OvalueClick();
+    this.Ovalue.onclick = function(){             // 给输入框添加点击事件
+        _this.blockKeyboard();
+    }
+    var oarr = ostr.split('');
+    for(var i=0; i<this.PlaceNameLi.length; i++) {
+        this.PlaceNameLi[i].index = i;
+        this.PlaceNameLi[i].onclick = function () {
+            if(oarr.length > 7) {
+                oarr.length = 7
+            }
+            oarr.push(this.innerHTML);
+            ostr = oarr.join('');
+            _this.Ovalue.value = ostr;
+            console.log(_this.Ovalue.value);
+        }
     }
 }
-// 点击隐藏键盘
-Plate.prototype.OkeyboardClick = function() {
+
+Plate.prototype.keyboardInput = function() {      // 点击键盘输入值
+    console.log(this)
+}
+
+Plate.prototype.hiddenKeyboard = function() {     // 点击隐藏键盘
     this.Okeyboard.style.display = 'none';
 }
-// 点击打开键盘
-Plate.prototype.OvalueClick = function() {
+
+Plate.prototype.blockKeyboard = function() {      // 点击打开键盘
     this.Okeyboard.style.display = 'block';
 }
