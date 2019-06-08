@@ -5,7 +5,7 @@ data：2019/3/25修改
 */
 'use strict';
 // 车牌键盘数组
-var place_name = [['京','津','沪','渝','蒙','新','藏','宁','桂','黑'],['吉','辽','晋','冀','青','鲁','豫','苏','皖','浙'],['闽','赣','湘','鄂','粤','琼','甘','陕','贵','云'],['川','回删']];
+var place_name = [['京','津','沪','渝','蒙','新','藏','宁','桂','黑'],['吉','辽','晋','冀','青','鲁','豫','苏','皖','浙'],['闽','赣','湘','鄂','粤','琼','甘','陕','贵','云'],['川']];
 var letter = [['1','2','3','4','5','6','7','8','9','0'],['Q','W','E','R','T','Y','U','P','港','澳'],['A','S','D','F','G','H','J','K','L','学'],['Z','X','C','V','B','N','M','警','回删']];
 
 // 存循环键盘数组的值
@@ -47,14 +47,16 @@ function Plate(id) {
     var oarr = ostr.split('');
     for(var i=0; i<this.placeNameLi.length; i++) {
         this.placeNameLi[i].index = i;
+        var plength = this.placeNameLi.length-1;
+        this.placeNameLi[plength].className = 'lastli';
+
         this.placeNameLi[i].onclick = function () {
             if(oarr.length > 7) {oarr.length = 7}
             oarr.push(this.innerHTML);
             ostr = oarr.join('');
             _this._value.value = ostr;
+            
         }
-        var plength = this.placeNameLi.length-1;
-        this.placeNameLi[plength].className = 'lastli';
         this.placeNameLi[plength].onclick = function(){
             oarr.splice(-1,1);
             ostr = oarr.join('');
@@ -62,17 +64,12 @@ function Plate(id) {
             if(ostr.length<1){
                 console.log("该弹车牌键盘啦！")
                 str = '';
-                // _okeyboard = '';
                 cyclicLi(str, place_name);
-                var _okeyboard ='<div class="keyboard"> \
-                    <div class="shut-down">关闭</div> \
-                    <div class="place-name">'+ str +'</div> \
-                    </div>';
-                console.log(_okeyboard);
-                _this._plate.replaceChild(_this.Oplace_name, _okeyboard);
-                console.log(str);
+                _this.Oplace_name.innerHTML = str;
             }
+            console.log(_this.pl41aceNameLi.innerHTML)
         }
+        console.log(_this.placeNameLi[i])
     }
 }
 
