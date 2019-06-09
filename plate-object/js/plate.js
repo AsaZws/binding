@@ -27,7 +27,12 @@ function Plate(id) {
     this._plate = document.getElementById(id);                       // 获取对象
     this._value = this._plate.getElementsByTagName('input')[0];      // 获取输入框
     var ostr = this._value.value;  // 输入框的车牌
-    ostr.length < 1 ? cyclicLi(str, place_name) : cyclicLi(str, letter);
+    function show(){
+        ostr.length < 1 ? cyclicLi(str, place_name) : cyclicLi(str, letter);
+        console.log(1);
+    }
+    show();
+
     var _okeyboard ='<div class="keyboard"> \
                         <div class="shut-down">关闭</div> \
                         <div class="place-name">'+ str +'</div> \
@@ -64,12 +69,11 @@ function Plate(id) {
             if(ostr.length<1){
                 console.log("该弹车牌键盘啦！")
                 str = '';
-                cyclicLi(str, place_name);
+                // cyclicLi(str, place_name);
+                show()
                 _this.Oplace_name.innerHTML = str;
             }
-            console.log(_this.pl41aceNameLi.innerHTML)
         }
-        console.log(_this.placeNameLi[i])
     }
 }
 
