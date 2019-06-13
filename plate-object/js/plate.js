@@ -28,7 +28,6 @@ function Plate(id) {
     }
     function show(){
         ostr.length < 1 ? cyclicLi(str, place_name) : cyclicLi(str, letter);
-        console.log(1);
     }
     show();
 
@@ -48,26 +47,35 @@ function Plate(id) {
     this._value.onclick = function(){           // 给输入框添加点击事件
         _this.blockKeyboard();
     }
-    var oarr = ostr.split('');
     // 循环数字键盘
     for(var i=0; i<this.placeNameLi.length; i++) {
         this.placeNameLi[i].index = i;
         // 获取循环中最后的一个索引
         var plength = this.placeNameLi.length-1;
         this.placeNameLi[plength].className = 'lastli';
-        // 给循环的每个li添加点击事件，并将值push到输入框中
-        this.placeNameLi[i].onclick = function (e) {
-            if(oarr.length > 7) {oarr.length = 7};
-            console.log(e);
-            oarr.push(this.innerHTML)
-            ostr = oarr.join('')
-            _this._value.value = ostr;
-            // console.log(_this.placeNameLi[plength])
+        // 给循环的每个li添加点击事件，并将值添加到输入框中
+        this.placeNameLi[i].onclick = function () {
+            if(ostr.length > 7) {
+                ostr = ostr.substring(0,ostr.length-1)
+            };
+            if(this.index < plength) {
+                ostr += this.innerHTML;
+                _this._value.value = ostr;
+            } else if (this.index == plength) {
+                ostr = _this._value.value;
+                ostr = ostr.substring(0,ostr.length-1)
+                _this._value.value = ostr;
+                if(ostr.length<1){
+                    console.log("该弹车牌键盘啦！")
+                    str = '';
+                    show()
+                    _this.oplace_name.innerHTML = str;
+                }
+            }
         }
-        // 给最后一个删除按钮添加点击事件，并将push的值从输入框中删除
+        // 给最后一个删除按钮添加点击事件，并将输入框的值逐个删除
         // this.placeNameLi[plength].onclick = function(){
-        //     oarr.splice(-1,1);
-        //     ostr = oarr.join('');
+        //     ostr = ostr.substring(0,ostr.length-1)
         //     _this._value.value = ostr;
         //     if(ostr.length<1){
         //         console.log("该弹车牌键盘啦！")
