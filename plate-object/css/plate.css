@@ -14,7 +14,7 @@ data：2019/3/8修改
     background-color: #eceef1;
 }
 /* 数字拼音键盘和地区简称键盘 */
-.keyboard .place-name {
+.keyboard .place-name, .keyboard .place-letter {
     width: 100%;
     /*display: none;*/
 }
@@ -33,7 +33,7 @@ data：2019/3/8修改
     cursor: pointer;
 }
 /* 数字字母键盘和地区简称键盘的每个按键样式 */
-.keyboard .place-name li {
+.keyboard .place-name li, .keyboard .place-letter li {
     text-align: center;
     padding: 0.86em 0.08em;
     border-radius: 0.4em;
@@ -45,20 +45,20 @@ data：2019/3/8修改
     list-style: none;
     cursor: pointer; 
 }
-.keyboard .place-name li:active {
+.keyboard .place-name li:active, .keyboard .place-letter li:active {
     background: #999;
 }
-.keyboard .place-name li:nth-child(10n) {
+.keyboard .place-name li:nth-child(10n), .keyboard .place-letter li:nth-child(10n) {
     margin-right: 0;
 }
-.keyboard .place-name .lastli {
+.keyboard .place-name .lastli, .keyboard .place-letter .lastli {
     padding: 0.86em 0.68em;
 }
 .keyboard .delet {
     width: 3.25em;
 }
 /* 区分每排键盘 */
-.keyboard .place-name ul {
+.keyboard .place-name ul, .keyboard .place-letter ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

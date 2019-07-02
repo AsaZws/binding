@@ -10,51 +10,82 @@ var letter = [['1','2','3','4','5','6','7','8','9','0'],['Q','W','E','R','T','Y'
 
 // 获取元素dom
 function Plate(id) {
-    var _this = this;                                                // 保存this
     this._plate = document.getElementById(id);                       // 获取对象
     this._value = this._plate.getElementsByTagName('input')[0];      // 获取输入框
-    var ostr = this._value.value;   // 输入框的车牌
-    var str = '';
-    function cyclicLi(oLi, arr) {   // 存循环键盘数组的值
-        for (var i in arr) {
-            for (var j in arr[i]) {
-                oLi += '<li>' + arr[i][j] + '</li>';
+    var _this = this;                                                // 保存this
+    var ostr = this._value.value;       // 输入框的车牌
+    var _okeyboard = '';                // 循环的键值
+    function cyclicLi(arr1, arr2) {     // 存循环键盘数组的值
+        var placeStr = '';              // 车牌简称
+        var letterStr = '';             // 数字拼音
+        for (var i in arr1) {
+            for (var j in arr1[i]) {
+                placeStr += '<li>' + arr1[i][j] + '</li>';
                 if(j % 10 == 9) {
-                    oLi += '</ul><ul>';
+                    placeStr += '</ul><ul>';
                 }
             }
         }
-        str = '<ul>' + oLi + '</ul>';
+        for (var i in arr2) {
+            for (var j in arr2[i]) {
+                letterStr += '<li>' + arr2[i][j] + '</li>';
+                if(j % 10 == 9) {
+                    letterStr += '</ul><ul>';
+                }
+            }
+        }
+        placeStr = '<div class="place-name"><ul>' + placeStr + '</ul></div>';
+        letterStr = '<div class="place-letter"><ul>' + letterStr + '</ul></div>';
+        _okeyboard += '<div class="keyboard">';
+        _okeyboard += '<div class="shut-down">关闭</div>';
+        _okeyboard += placeStr + letterStr;
+        _okeyboard += '</div>';
     }
-    function show(){
-        ostr.length < 1 ? cyclicLi(str, place_name) : cyclicLi(str, letter);
+    cyclicLi(place_name,letter);
+    _this._plate.insertAdjacentHTML('beforeend', _okeyboard);                   // 将循环的键循环进去
+    this.okeyboard = this._plate.getElementsByClassName('keyboard')[0];         // 渲染完成获取键盘
+    this.placeLetter = this._plate.getElementsByClassName('place-letter')[0];  // 获取地名键盘
+    this.oplaceName = this._plate.getElementsByClassName('place-name')[0];     // 获取数字键盘
+    this.placeLetterLi = this.placeLetter.getElementsByTagName('li');          // 获取所有地名li
+    this.placeNameLi = this.oplaceName.getElementsByTagName('li');             // 获取所有地名li
+    this.shutDown = this._plate.getElementsByClassName('shut-down')[0];         // 获取关闭
+    function judgingLength() {
+        if ( ostr.length < 1 )
+        {
+            _this.placeLetter.style.display = 'none';
+            _this.oplaceName.style.display = 'block';
+        }
+        else 
+        {
+            _this.oplaceName.style.display = 'none';
+            _this.placeLetter.style.display = 'block';
+        }
     }
-    show();
-
-    var _okeyboard ='<div class="keyboard"> \
-                        <div class="shut-down">关闭</div> \
-                        <div class="place-name">'+ str +'</div> \
-                    </div>';
-    _this._plate.insertAdjacentHTML('afterBegin', _okeyboard);                                          // 渲染完整的dom
-    this.okeyboard = this._plate.getElementsByClassName('keyboard')[0];                                 // 渲染完成获取键盘
-    this.placeNameLi = this._plate.getElementsByClassName('place-name')[0].getElementsByTagName('li');  // 获取所有li
-    this.shutDown = this._plate.getElementsByClassName('shut-down')[0];                                 // 获取关闭
-    this.oplace_name = this._plate.getElementsByClassName('place-name')[0];                             // 获取键盘
-
+    judgingLength();
     this.shutDown.onclick = function () {       // 给关闭按钮添加点击事件
         _this.hiddenKeyboard();
     }
     this._value.onclick = function(){           // 给输入框添加点击事件
         _this.blockKeyboard();
     }
-    // 循环数字键盘
     for(var i=0; i<this.placeNameLi.length; i++) {
-        this.placeNameLi[i].index = i;
-        // 获取循环中最后的一个索引
-        var plength = this.placeNameLi.length-1;
-        this.placeNameLi[plength].className = 'lastli';
         // 给循环的每个li添加点击事件，并将值添加到输入框中
         this.placeNameLi[i].onclick = function () {
+            ostr += this.innerHTML;
+            _this._value.value = ostr;
+            if(ostr.length > 0) {
+                judgingLength();
+            }
+        }
+    }
+    // 循环数字键盘
+    for(var i=0; i<this.placeLetterLi.length; i++) {
+        this.placeLetterLi[i].index = i;
+        // 获取循环中最后的一个索引
+        var plength = this.placeLetterLi.length-1;
+        this.placeLetterLi[plength].className = 'lastli';
+        // 给循环的每个li添加点击事件，并将值添加到输入框中
+        this.placeLetterLi[i].onclick = function () {
             if(ostr.length > 7) {
                 ostr = ostr.substring(0,ostr.length-1)
             };
@@ -66,24 +97,11 @@ function Plate(id) {
                 ostr = ostr.substring(0,ostr.length-1)
                 _this._value.value = ostr;
                 if(ostr.length<1){
+                    judgingLength();
                     console.log("该弹车牌键盘啦！")
-                    str = '';
-                    show()
-                    _this.oplace_name.innerHTML = str;
                 }
             }
         }
-        // 给最后一个删除按钮添加点击事件，并将输入框的值逐个删除
-        // this.placeNameLi[plength].onclick = function(){
-        //     ostr = ostr.substring(0,ostr.length-1)
-        //     _this._value.value = ostr;
-        //     if(ostr.length<1){
-        //         console.log("该弹车牌键盘啦！")
-        //         str = '';
-        //         show()
-        //         _this.oplace_name.innerHTML = str;
-        //     }
-        // }
     }
 }
 
