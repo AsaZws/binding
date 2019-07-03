@@ -39,6 +39,7 @@
         .plate {
             margin-top: -1.5em;
             /* overflow: hidden; */
+            padding: 1px;
         }
         .plate input {
             width: 100%;
@@ -47,17 +48,13 @@
             outline: none;
             border: none;
             cursor: pointer;
+            letter-spacing: 4px;
         }
         .plate input::-webkit-input-placeholder {
             color: #ccc;
             font-weight: 100;
         }
     </style>
-    <script>
-    window.onload = function(){
-        var tab1 = new Plate("plate");
-    }
-    </script>
 </head>
 <body>
     <header>
@@ -69,5 +66,11 @@
             <input readonly type="text" placeholder="请输入车牌" maxlength="8" value="粤B">
         </div>
     </section>
+    <script>
+        window.onload = function () {
+            var plate1 = new Plate("plate");
+            console.log(plate1.ostr)
+        }
+    </script>
 </body>
 </html>

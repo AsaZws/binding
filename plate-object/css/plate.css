@@ -1,8 +1,4 @@
-﻿/* 
-车牌数字键盘css样式
-name：Asa_Zhou
-data：2019/3/8修改
-*/
+﻿/* 车牌数字键盘css样式 name：Asa_Zhou data：2019/7/03修改完成 */
 /* 父级基础字号 */
 .keyboard {
     width: 100%;
@@ -16,7 +12,6 @@ data：2019/3/8修改
 /* 数字拼音键盘和地区简称键盘 */
 .keyboard .place-name, .keyboard .place-letter {
     width: 100%;
-    /*display: none;*/
 }
 /* 关闭 */
 .keyboard .shut-down {
@@ -52,6 +47,7 @@ data：2019/3/8修改
     margin-right: 0;
 }
 .keyboard .place-name .lastli, .keyboard .place-letter .lastli {
+    width: 2em;
     padding: 0.86em 0.68em;
 }
 .keyboard .delet {
@@ -64,28 +60,51 @@ data：2019/3/8修改
     justify-content: center;
 }
 
-/* 手机屏幕大于380的屏幕 */
-@media screen and ( min-width: 380px ) {
-    .keyboard li, .area li {
+/* 手机屏幕大于392的屏幕 */
+@media screen and ( min-width: 392px ) {
+    .keyboard .place-name li, .keyboard .place-letter li {
         width: 2.0625em;
     }
 }
-/* 手机屏幕大于380的屏幕 */
-@media screen and ( min-width: 400px ) {
-    .keyboard li, .area li {
-        width: 2.2em;
+/* 手机屏幕大于392小于400的屏幕 */
+@media screen and ( min-width: 413px ) {
+    .keyboard .place-name li, .keyboard .place-letter li {
+        width: 2.1em;
     }
 }
-/* 手机屏幕小于370px的屏幕 */
-@media screen and ( max-width: 370px ) {
-    .keyboard li, .area li {
-        /* width: 0.54rem; */
-        width: 1.7em;
-        height: 2.6em;
-        line-height: 2.6em;
+/* 手机屏幕小于392的屏幕 */
+@media screen and ( max-width: 392px ) {
+    .keyboard .place-name li, .keyboard .place-letter li {
+        width: 1.96em;
     }
-    .keyboard .delet {
-        height: 2.6em;
-        line-height: 2.6em;
+}
+/* 手机屏幕小于375px的屏幕 */
+@media screen and ( max-width: 375px ) {
+    .keyboard .place-name li, .keyboard .place-letter li {
+        width: 1.9em;
+    }
+}
+/* 手机屏幕小于365px的屏幕 */
+@media screen and ( max-width: 365px ) {
+    .keyboard .place-name li, .keyboard .place-letter li {
+        width: 1.86em;
+    }
+}
+/* 手机屏幕小于360px的屏幕 */
+@media screen and ( max-width: 360px ) {
+    .keyboard .place-name li, .keyboard .place-letter li {
+        width: 1.8em;
+    }
+}
+/* 手机屏幕小于350px的屏幕 */
+@media screen and ( max-width: 350px ) {
+    .keyboard .place-name li, .keyboard .place-letter li {
+        width: 1.6em;
+    }
+}
+/* 手机屏幕小于320px的屏幕 */
+@media screen and ( max-width: 320px ) {
+    .keyboard .place-name li, .keyboard .place-letter li {
+        width: 1.58em;
     }
 }
