@@ -7,7 +7,10 @@
     left: 0;
     bottom: 0;
     z-index: 999;
-    background-color: #eceef1;
+    background-color: #cfd3da;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
 }
 /* 数字拼音键盘和地区简称键盘 */
 .keyboard .place-name, .keyboard .place-letter {
@@ -15,13 +18,11 @@
 }
 /* 关闭 */
 .keyboard .shut-down {
-    height: 2em;
-    line-height: 2em;
     text-align: right;
-    padding: 0 0.5em;
+    padding: 0.2em 0.5em;
     font-size: 14px;
     background-color: #f9f9f9;
-    color: #333;
+    color: #000;
     border-bottom: 0.03125em solid #ddd;
     border-top: 0.03125em solid #eee;
     margin-bottom: 0.8em;
@@ -30,28 +31,26 @@
 /* 数字字母键盘和地区简称键盘的每个按键样式 */
 .keyboard .place-name li, .keyboard .place-letter li {
     text-align: center;
-    padding: 0.86em 0.08em;
+    width: 1.968em;
+    padding: 0.86em 0;
     border-radius: 0.4em;
     background-color: #fff;
     font-size: 1em;
-    color: #333;
+    color: #000;
     margin: 0 0.25em 0.5em 0;
-    box-shadow: 0 0.125em 0 #aaa;
+    box-shadow: 0 0.125em 0 #87898e;
     list-style: none;
-    cursor: pointer; 
+    cursor: pointer;
 }
 .keyboard .place-name li:active, .keyboard .place-letter li:active {
-    background: #999;
+    background: #a7afba;
 }
 .keyboard .place-name li:nth-child(10n), .keyboard .place-letter li:nth-child(10n) {
     margin-right: 0;
 }
 .keyboard .place-name .lastli, .keyboard .place-letter .lastli {
-    width: 2em;
+    width: 2.2em;
     padding: 0.86em 0.68em;
-}
-.keyboard .delet {
-    width: 3.25em;
 }
 /* 区分每排键盘 */
 .keyboard .place-name ul, .keyboard .place-letter ul {
@@ -75,13 +74,18 @@
 /* 手机屏幕小于392的屏幕 */
 @media screen and ( max-width: 392px ) {
     .keyboard .place-name li, .keyboard .place-letter li {
-        width: 1.96em;
+        width: 2.12em;
     }
 }
 /* 手机屏幕小于375px的屏幕 */
 @media screen and ( max-width: 375px ) {
     .keyboard .place-name li, .keyboard .place-letter li {
-        width: 1.9em;
+        width: 1.92em;
+        padding: 0.86em 0;
+    }
+    .keyboard .place-name .lastli, .keyboard .place-letter .lastli {
+        width: 2.2em;
+        padding: 0.86em 0.68em;
     }
 }
 /* 手机屏幕小于365px的屏幕 */
@@ -93,7 +97,7 @@
 /* 手机屏幕小于360px的屏幕 */
 @media screen and ( max-width: 360px ) {
     .keyboard .place-name li, .keyboard .place-letter li {
-        width: 1.8em;
+        width: 1.96em;
     }
 }
 /* 手机屏幕小于350px的屏幕 */
