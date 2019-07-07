@@ -52,6 +52,10 @@
     width: 2.2em;
     padding: 0.86em 0.68em;
 }
+.keyboard .place-name .place-color, .keyboard .place-letter .place-color {
+    color: #6f747c;
+    background-color: #a7afbb;
+}
 /* 区分每排键盘 */
 .keyboard .place-name ul, .keyboard .place-letter ul {
     display: flex;

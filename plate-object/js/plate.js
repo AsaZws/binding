@@ -61,20 +61,51 @@ function Plate(id) {
             if(ostr.length > 0) { judgingLength(); }
         }
     }
+    this.tab = function (item) {     // 键盘的背景颜色改变
+        this.placeLetterLi[item].classList.add("place-color");
+    }
+    this.clear = function (num) {
+        this.placeLetterLi[num].classList.remove("place-color");
+    }
+    this.init = function () {
+        if ( ostr.length == 1 ) {   // 当车牌输入框长度为1的时候以下索引的键盘会改变颜色
+            this.tab(18);
+            this.tab(19);
+            this.tab(29);
+            this.tab(37);
+            for ( var j=0; j<10; j++ ) {
+                this.tab(j);
+            }
+        } else if ( ostr.length == 2 ) {
+            console.log("清除所有class名字")
+            this.clear(18);
+            this.clear(19);
+            this.clear(29);
+            this.clear(37);
+            for ( var k=0; k<10; k++ ) {
+                this.clear(k);
+            }
+        }
+    }
     for(var i=0; i<this.placeLetterLi.length; i++) {        // 循环数字键盘
         this.placeLetterLi[i].index = i;
         var plength = this.placeLetterLi.length-1;          // 获取循环中最后的一个索引
-        this.placeLetterLi[plength].className = 'lastli';
-        this.placeLetterLi[i].onclick = function () {       // 给循环的每个li添加点击事件，并将值添加到输入框中
-            if(ostr.length > 7) { ostr = ostr.substring(0,ostr.length-1) };
-            if(this.index < plength) {
+        this.placeLetterLi[plength].classList.add("lastli");
+        this.init();      // 当车牌初次循环出来的时候，初始化这个函数
+        this.placeLetterLi[i].onclick = function () {       // 给循环的每个li添加点击事件，并将值添加到输入框中   
+            _this.init();
+            if(ostr.length > 7) {   // 当车牌长度大于7位的时候就自动删除最后一位
+                ostr = ostr.substring(0,ostr.length-1)
+            };
+            if(this.index < plength) {  // 点击车牌键盘就把键盘值添加到车牌输入框里面
                 ostr += this.innerHTML;
                 _this._value.value = ostr;
-            } else if (this.index == plength) {
+            } else if (this.index == plength) {     // 当键盘最后一位为删除的时候就自动删除车牌键盘的最后一位
+                _this.init();
                 ostr = _this._value.value;
                 ostr = ostr.substring(0,ostr.length-1)
                 _this._value.value = ostr;
-                if(ostr.length<1){ judgingLength(); }
+                if(ostr.length<1){ judgingLength(); }   // 当删除到最后一位的时候，就隐藏数字键盘，弹起地名键盘
             }
         }
     }
