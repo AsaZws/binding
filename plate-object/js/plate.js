@@ -98,11 +98,6 @@ function Plate(id) {
         this.placeLetterLi[plength].classList.add("lastli");
         this.init();                                        // 当车牌初次循环出来的时候，初始化这个函数
         this.placeLetterLi[i].onclick = function () {       // 给循环的每个li添加点击事件，并将值添加到输入框中 
-            if(ostr.length == 8) {                          // 当车牌长度大于7位的时候就自动删除最后一位和隐藏键盘
-                ostr = ostr.substring(0,ostr.length-1);
-                _this.init();
-                _this.okeyboard.style.display = 'none';
-            };
             if(this.index < plength) {                      // 点击车牌键盘就把键盘值添加到车牌输入框里面
                 ostr += this.innerHTML;
                 _this.init();
@@ -113,7 +108,12 @@ function Plate(id) {
                 _this.init();
                 _this._value.value = ostr;
                 if(ostr.length<1){ _this.judgingLength(); } // 当删除到最后一位的时候，就隐藏数字键盘，弹起地名键盘
-            }
+            };
+            if(ostr.length > 7) {                           // 当车牌长度大于7位的时候就自动删除最后一位和隐藏键盘
+                ostr = ostr.substring(0,ostr.length-1);
+                _this.init();
+                _this.okeyboard.style.display = 'none';
+            };
         }
     }
 }

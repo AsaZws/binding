@@ -11,6 +11,7 @@
     -moz-user-select: none;
     -khtml-user-select: none;
     user-select: none;
+    display: none;
 }
 /* 数字拼音键盘和地区简称键盘 */
 .keyboard .place-name, .keyboard .place-letter {
@@ -32,7 +33,7 @@
 .keyboard .place-name li, .keyboard .place-letter li {
     text-align: center;
     width: 1.968em;
-    padding: 0.86em 0;
+    padding: 0.64em 0;
     border-radius: 0.4em;
     background-color: #fff;
     font-size: 1em;
@@ -50,7 +51,7 @@
 }
 .keyboard .place-name .lastli, .keyboard .place-letter .lastli {
     width: 2.2em;
-    padding: 0.86em 0.68em;
+    padding: 0.64em 0.48em;
 }
 .keyboard .place-name .place-color, .keyboard .place-letter .place-color {
     color: #6f747c;
@@ -85,11 +86,9 @@
 @media screen and ( max-width: 375px ) {
     .keyboard .place-name li, .keyboard .place-letter li {
         width: 1.92em;
-        padding: 0.86em 0;
     }
     .keyboard .place-name .lastli, .keyboard .place-letter .lastli {
         width: 2.2em;
-        padding: 0.86em 0.68em;
     }
 }
 /* 手机屏幕小于365px的屏幕 */
