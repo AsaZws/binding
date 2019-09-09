@@ -2,10 +2,10 @@
 车牌键盘框：https://asazws.github.io/binding/binding.html
 
 ## 车牌键盘
-```markdown
-我们做智慧停车的，在微信端开发一个车牌输入的键盘，下面是效果图，
-有两种展示方式，当然两种的代码结构不一样，需要哪种就用哪种，代码有累赘的地方希望指出来。
-```
+我们做智慧停车的，在微信端开发一个车牌输入的键盘，下面是效果图，    
+有两种展示方式，当然两种的代码结构不一样，需要哪种就用哪种，代码有累赘的地方希望指出来。    
+[Vue版](https://github.com/AsaZws/Keyboard)
+
 
 ### 这种使用起来比较简单，是js原生的，个人感觉使用起来比较快，具体请看下方。
 ![](https://github.com/AsaZws/binding/blob/master/images/car.gif)
