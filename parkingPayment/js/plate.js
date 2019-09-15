@@ -20,34 +20,9 @@ function Plate(id) {
 	plateFrame.innerHTML =  placeStrs(plate_umber);
 
 	var plateFrameLi = plateFrame.getElementsByTagName("li");
-	
-	function showPlateFrame() {
-		for(var i=0; i<plateFrameLi.length; i++) {
-			plateFrameLi[i].index = i;
-
-			var plateIndex = 2;
-			plateFrameLi[plateIndex].className = "active";
-			plateFrameLi[plateFrameLi.length-1].className = "new";
-			plateFrameLi[i].onclick = function() {
-				var index = this.index;
-				if( index == 0 ) {
-					showOplaceName();
-				} else {
-					showPlaceLetter();
-				}
-				// 去掉所有的class
-				for(var j=0; j<plateFrameLi.length-1; j++) {
-					plateFrameLi[j].className = "";
-				}
-				this.className = "active";
-			}
-	
-		}
-	}
-	showPlateFrame();
 
 	function cyclicLi() {                 // 存循环键盘数组的值
-		var okeyboards = ''
+		var okeyboards = '';
 		var placeStr = placeStrs(place_name);  // 地名简称
 		var letterStr = placeStrs(letter);     // 数字拼音
 		placeStr = '<div class="place-name">' + placeStr + '</div>';
@@ -97,6 +72,29 @@ function Plate(id) {
 	shutDown.onclick = function () {            // 给关闭按钮添加点击事件
 		hide();
 	}
+	// 创建键盘框
+	// showPlateFrame();
+	var plateIndex = 2;
+	for(var i=0; i<plateFrameLi.length; i++) {
+		plateFrameLi[i].index = i;
+		plateFrameLi[plateIndex].className = "active";
+		plateFrameLi[plateFrameLi.length-1].className = "new";
+		plateFrameLi[i].onclick = function() {
+			var index = this.index;
+			plateIndex = index;
+			if( index == 0 ) {
+				showOplaceName();
+			} else {
+				showPlaceLetter();
+			}
+			// 去掉所有的class
+			for(var j=0; j<plateFrameLi.length-1; j++) {
+				plateFrameLi[j].className = "";
+			}
+			plateFrameLi[7].className = "new";
+			this.className = "active";
+		}
+	}
 	for (var i = 0; i < placeNameLi.length; i++) {
 		placeNameLi[i].index = i;
 		var plength = placeNameLi.length - 1;          // 获取循环中最后的一个索引
@@ -105,12 +103,45 @@ function Plate(id) {
 		placeNameLi[i].onclick = function () {  // 给循环的每个li添加点击事件，并将值添加到输入框中
 			if (this.index == plength) {               // 当键盘最后一位为删除的时候就自动删除车牌键盘的最后一位
 				_this.plateNumber = _this.plateNumber.substring(0, _this.plateNumber.length - 1)
-				console.log(_this.plateNumber);
 			} else {
-				_this.plateNumber += this.innerHTML;
+				_this.plateNumber += this.innerHTML;		
 				init();
 			}
 			if (_this.plateNumber.length > 0) { judgingLength(); }
+		}
+	}
+	for (var i = 0; i < placeLetterLi.length; i++) {        // 循环数字键盘
+		placeLetterLi[i].index = i;
+		var plength = placeLetterLi.length - 1;          // 获取循环中最后的一个索引
+		placeLetterLi[plength].classList.add("lastli");
+		init();                                        // 当车牌初次循环出来的时候，初始化这个函数
+		placeLetterLi[i].onclick = function () {       // 给循环的每个li添加点击事件，并将值添加到输入框中 
+			if (this.index < plength) {                      // 点击车牌键盘就把键盘值添加到车牌输入框里面
+				_this.plateNumber += this.innerHTML;
+				init();
+			} else if (this.index == plength) {             // 当键盘最后一位为删除的时候就自动删除车牌键盘的最后一位
+				_this.plateNumber = _this.plateNumber.substring(0, _this.plateNumber.length - 1)
+				init();
+				if (_this.plateNumber.length < 1) { judgingLength(); } // 当删除到最后一位的时候，就隐藏数字键盘，弹起地名键盘
+			};
+			if (_this.plateNumber.length > 7) {                           // 当车牌长度大于7位的时候就自动删除最后一位
+				_this.plateNumber = _this.plateNumber.substring(0, _this.plateNumber.length - 1);
+				init();
+			};
+			if (_this.plateNumber.length > 6) {                           // 当车牌长度大于6位的时候就隐藏键盘
+				hide();
+			};
+			// 把点击键盘上的值给车牌框
+			plateFrameLi[plateIndex].innerHTML = this.innerHTML;
+			plateFrameLi[plateIndex].className = "";
+			if(plateIndex == 6) {
+				plateIndex = 6
+			} else {
+				plateIndex++;
+			}
+			plateFrameLi[plateIndex].className = "active";
+			console.log(plateIndex);
+			
 		}
 	}
 	function tab(item) {                     // 键盘的背景颜色改变
@@ -143,31 +174,6 @@ function Plate(id) {
 			tab(19);
 			tab(29);
 			tab(37);
-		}
-	}
-	for (var i = 0; i < placeLetterLi.length; i++) {        // 循环数字键盘
-		placeLetterLi[i].index = i;
-		var plength = placeLetterLi.length - 1;          // 获取循环中最后的一个索引
-		placeLetterLi[plength].classList.add("lastli");
-		init();                                        // 当车牌初次循环出来的时候，初始化这个函数
-		placeLetterLi[i].onclick = function () {       // 给循环的每个li添加点击事件，并将值添加到输入框中 
-			if (this.index < plength) {                      // 点击车牌键盘就把键盘值添加到车牌输入框里面
-				_this.plateNumber += this.innerHTML;
-				init();
-			} else if (this.index == plength) {             // 当键盘最后一位为删除的时候就自动删除车牌键盘的最后一位
-				_this.plateNumber = _this.plateNumber.substring(0, _this.plateNumber.length - 1)
-				init();
-				if (_this.plateNumber.length < 1) { judgingLength(); } // 当删除到最后一位的时候，就隐藏数字键盘，弹起地名键盘
-			};
-			if (_this.plateNumber.length > 7) {                           // 当车牌长度大于7位的时候就自动删除最后一位
-				_this.plateNumber = _this.plateNumber.substring(0, _this.plateNumber.length - 1);
-				init();
-			};
-			if (_this.plateNumber.length > 6) {                           // 当车牌长度大于6位的时候就隐藏键盘
-				hide();
-			};
-			console.log(_this.plateNumber);
-			
 		}
 	}
 }
