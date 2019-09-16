@@ -1,0 +1,65 @@
+
+/* 按钮颜色 */
+.weui-dialog__btn {
+  color: #108de9;
+}
+.weui-btn_primary {
+  background-color: #108de9;
+}
+.weui-btn_plain-primary {
+  color: #108de9;
+  border: 1px solid #108de9;
+}
+
+/* 按钮点击颜色 */
+.weui-btn_primary:not(.weui-btn_disabled):active {
+  color: hsla(0,0%,100%,.6);
+  background-color: #1B82D2;
+}
+
+
+/* 禁止按钮的背景颜色 */
+.weui-btn_disabled.weui-btn_primary{
+  background-color:#3ea3ed;
+}
+
+
+/* 关闭字颜色 */
+.toolbar .picker-button {
+  color: #108de9;
+}
+
+/* 查看充电桩详情 */
+.color-primary {
+  color: #108de9;
+}
+
+/* 搜索框 */
+.weui-search-bar__cancel-btn {
+  display: none;
+  margin-left: 10px;
+  line-height: 28px;
+  color: #1b82d2;
+  white-space: nowrap;
+}
+
+/* 成功颜色 */
+.weui-icon-success {
+  color: #108de9;
+}
+
+/* 搜索框背景颜色 */
+.weui-search-bar {
+  background-color: #f2f2f2;
+}
+.weui-search-bar:before {
+  border: none;
+}
+
+/* 单选框√的颜色 */
+.weui-cells_radio .weui-check:checked+.weui-icon-checked:before {
+  display: block;
+  content: '\EA08';
+  color: #108de9;
+  font-size: 16px;
+}

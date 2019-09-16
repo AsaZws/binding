@@ -77,18 +77,21 @@ body {
 
 .header {
   width: 100%;
-  height: 140px;
-  background-color: #1e82d2;
+  height: 148px;
+  position: relative;
+  z-index: -1;
+  /* background-color: #1e82d2;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  z-index: -1;
+  z-index: -1; */
 }
 
 .keyboard-padding {
   padding: 0 14px;
   text-align: center;
+  margin-top: -64px;
 }
 
 .keyboard-padding>p {
@@ -130,7 +133,7 @@ body {
 .plate-frame li.new {
   border: 1px dashed #3B9548;
   background: url(../images/new.png) no-repeat 3px 3px;
-  background-size: 80%;
+  background-size: 80% 80%;
 }
 
 /* 输入框 */
