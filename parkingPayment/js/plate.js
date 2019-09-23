@@ -42,18 +42,18 @@ function Plate(id) {
 	}
 	// 显示地名键盘
 	function showOplaceName() {
-		show();
+		_this.show();
 		_this.placeLetter.style.display = 'none';
 		_this.oplaceName.style.display = 'block';
 	}
 	// 显示数字键盘
 	function showPlaceLetter() {
-		show();
+		_this.show();
 		_this.oplaceName.style.display = 'none';
 		_this.placeLetter.style.display = 'block';
 	}
 	// 显示键盘的方法
-	function show() {
+	this.show = function () {
 		_this.okeyboard.style.display = 'block';
 	}
 	// 隐藏键盘的方法
@@ -94,7 +94,9 @@ function Plate(id) {
 			for(var j=0; j<_this.plateFrameLi.length-1; j++) {
 				_this.plateFrameLi[j].className = "";
 			}
-			_this.plateFrameLi[7].className = "new";
+			if(_this.plateFrameLi[_this.plateFrameLi.length-1].innerHTML == '') {
+				_this.plateFrameLi[_this.plateFrameLi.length-1].className = "new";
+			}
 			this.className = "active";
 		}
 	}
@@ -144,11 +146,11 @@ function Plate(id) {
 				if(this.innerHTML !== "")  {
 					_this.plateFrameLi[plateIndex].innerHTML = this.innerHTML;
 					_this.plateFrameLi[plateIndex].className = "";
-					if(plateIndex == 6) {
-						plateIndex = 6;
+					if(plateIndex == _this.plateFrameLi.length-2) {
+						plateIndex = _this.plateFrameLi.length-2;
 					}
-					else if(plateIndex == 7) {
-						plateIndex = 7;
+					else if(plateIndex == _this.plateFrameLi.length-1) {
+						plateIndex = _this.plateFrameLi.length-1;
 					}
 					else {
 						plateIndex++;
@@ -157,7 +159,6 @@ function Plate(id) {
 				_this.plateFrameLi[plateIndex].className = "active";
 				init();
 			} else if (this.index == plength) {
-				// _this.plateNumber = _this.plateNumber.substring(0, _this.plateNumber.length - 1)
 				_this.plateFrameLi[plateIndex].innerHTML = "";
 				_this.plateFrameLi[plateIndex].className = "";
 				if(plateIndex == 1) {
@@ -172,6 +173,9 @@ function Plate(id) {
 				}
 				init();
 				_this.plateFrameLi[plateIndex].className = "active";
+				if(_this.plateFrameLi[_this.plateFrameLi.length-1].innerHTML == '') {
+					_this.plateFrameLi[_this.plateFrameLi.length-1].className = "new";
+				}
 			}
 		}
 	}

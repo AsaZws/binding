@@ -6,24 +6,11 @@
   <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,width=device-width,initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>停车缴费</title>
-  <link rel="stylesheet" href="css/weui.min.css">
-  <link rel="stylesheet" href="css/jquery-weui.min.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/index.css">
-  <link rel="stylesheet" href="css/weuicolor.css">
 </head>
 
 <body ontouchstart="" οnmοuseοver="">
-  <!-- 轮播图 -->
-  <div class="swiper-container header">
-    <!-- Additional required wrapper -->
-    <div class="swiper-wrapper">
-      <!-- Slides -->
-      <div class="swiper-slide"><img style="width: 100%;" src="./images/swiper-1.png" /></div>
-    </div>
-    <!-- If we need pagination -->
-    <div class="swiper-pagination"></div>
-  </div>
 
   <!-- 车牌内容 -->
   <div class="keyboard-input">
@@ -35,136 +22,38 @@
         <div class="plate-frame"></div>
         <!-- 查询按钮 -->
         <div class="plate-button">
-          <a href="javascript:queryDetail(searchInformation);" class="queryDetail">查询停车费</a>
-        </div>
-        <!-- 查询详情 -->
-        <div class="detail" id="detail"></div>
-        <!-- 提示说明 -->
-        <div class="introduce">
-          <h3>温馨提示</h3>
-          <span>1>缴费说明：输入需要缴费的车牌，查询缴费金额，缴费后请在系统返回的规定时间内出场，超时后会继续计费！</span><br/>
-          <span>2>其他说明：车牌识别异常，导致无法查询到结果的请到收费处人工查询缴费，高级功能请手机绑定后继续使用！</span>
+          <a href="javascript:queryDetail();" class="queryDetail">查询停车费</a>
         </div>
       </div>
 
     </div>
   </div>
-  <!-- 支付方式 -->
-  <div id="half" class='weui-popup__container popup-bottom'>
-    <div class="weui-popup__overlay"></div>
-    <div class="weui-popup__modal">
-      <div class="toolbar">
-        <div class="toolbar-inner" style="font-size: 14px;">
-          <a href="javascript:;" class="picker-button close-popup">关闭</a>
-          <h1 class="title" style="font-size: 14px;">选择支付方式</h1>
-        </div>
-      </div>
-      <div class="modal-content">
-        <div class="weui-cells weui-cells_radio">
-          <label class="weui-cell weui-check__label" for="x11">
-            <div class="weui-cell__hd"><img src="images/wechat.png"></div>
-            <div class="weui-cell__bd">
-              <p>微信支付</p>
-            </div>
-            <div class="weui-cell__ft">
-              <input type="radio" class="weui-check" name="radio1" id="x11" checked="checked">
-              <span class="weui-icon-checked"></span>
-            </div>
-          </label>
-          <label class="weui-cell weui-check__label" for="x12">
-            <div class="weui-cell__hd"><img src="images/alipay.png"></div>
-            <div class="weui-cell__bd">
-              <p>支付宝支付</p>
-            </div>
-            <div class="weui-cell__ft">
-              <input type="radio" name="radio1" class="weui-check" id="x12">
-              <span class="weui-icon-checked"></span>
-            </div>
-          </label>
-          <label class="weui-cell weui-check__label" for="x13">
-            <div class="weui-cell__hd"><img src="images/bankcard.png"></div>
-            <div class="weui-cell__bd">
-              <p>银行卡支付</p>
-            </div>
-            <div class="weui-cell__ft">
-              <input type="radio" name="radio1" class="weui-check" id="x13">
-              <span class="weui-icon-checked"></span>
-            </div>
-          </label>
-          <div style="padding: 16px">
-            <a href="javascript:selectPay();" class="weui-btn weui-btn_primary">确定</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="js/jquery-2.1.4.js"></script>
-  <script src="js/jquery-weui.min.js"></script>
-  <script src="js/swiper.js"></script>
   <script src="js/plate.js"></script>
   <script>
-    $(".swiper-container").swiper({
-      loop: true,
-      autoplay: 3000
-    });
     // 加载车牌键盘
     var plate1 = new Plate("plate");
 
     // 查询车牌
     function getplateNumber() {
       var plateNumber = '';
-      var platesLi = $(".plate-frame ul li")
+      var platesLi = document.querySelector('.plate-frame ul li');
       for(var i=0; i<platesLi.length; i++) {
         plateNumber = platesLi.text();
       }
       return plateNumber;
     }
-    // 查询详情对象需要的参数
-    var searchInformation = {
-      oParking: "鲤鱼门西街停车场",
-      plateNumber: getplateNumber(),  // 车牌号码
-      entryTime: "2019-09-10 09:24:45",
-      advancedTime: "3小时6分",
-      parkingFee: "14.00",
-      carImg: "images/car.png"
-    }
 
     // 查询停车详情的方法
-    function queryDetail(parkingDetail) {
+    function queryDetail() {
       var detail = document.getElementById("detail");                  // 停车详情
+      console.log(getplateNumber());
+      
       if(getplateNumber().length < 7) {
         alert("请输入正确车牌");
       } else {
         // 点击查询隐藏键盘
         plate1.hide();
-        // 缴费明细的字符串拼接
-        var detailStr = '<ul><div class="plate-number"><img src="'+ searchInformation.carImg +'" alt=""><strong>' + getplateNumber() + '</strong></div>';
-            detailStr += "<li><span>车场名称:</span><i>" + parkingDetail.oParking + "</i></li>";
-            detailStr += "<li><span>入场时间:</span><i>" + parkingDetail.entryTime + "</i></li>";
-            detailStr += "<li><span>已停时长:</span><i>" + parkingDetail.advancedTime + "</i></li>";
-            detailStr += "<li><span>停车费用:</span><i class='money-colors'>" + parkingDetail.parkingFee + "元</i></li></ul>";
-            // detailStr += '<a href="javascript:pay();" class="pay"><p>立即支付</p></a></ul>';
-            detailStr += '<a href="javascript:;" data-target="#half" class="queryDetail open-popup">立即支付</a>';
-        // 插入停车详情
-        detail.innerHTML = detailStr;
       }
-    }
-    // 选择支付方式
-    function selectPay() {
-      $("input[type='radio']").each(function() {
-        if($(this).is(":checked")) {
-          // 选择的当前支付方式的id
-          console.log($(this).attr('id'))
-
-          $.showLoading("支付中...");
-          setTimeout(function() {
-            $.hideLoading();
-            // 2秒后调起选择的支付方式
-            window.location.href = "paySucceed.html";
-          }, 2000)
-        }
-      })
     }
 
   </script>
