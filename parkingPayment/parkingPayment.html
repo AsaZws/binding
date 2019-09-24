@@ -13,42 +13,30 @@
 <body ontouchstart="" οnmοuseοver="">
 
   <!-- 车牌内容 -->
-  <div class="keyboard-input">
-    <div class="keyboard-padding" id="plate" plateNumbers="粤B">
+  <div class="keyboard-padding" id="plate" plateNumbers="">
 
-      <p>请输入车牌</p>
-      <div class="plate">
-        <!-- 车牌框 -->
-        <div class="plate-frame"></div>
-        <!-- 查询按钮 -->
-        <div class="plate-button">
-          <a href="javascript:queryDetail();" class="queryDetail">查询停车费</a>
-        </div>
+    <p>请输入车牌</p>
+    <div class="plate">
+      <!-- 车牌框 -->
+      <div class="plate-frame"></div>
+      <!-- 查询按钮 -->
+      <div class="plate-button">
+        <a href="javascript:queryDetail();" class="queryDetail">查询停车费</a>
       </div>
-
     </div>
+
   </div>
   <script src="js/plate.js"></script>
   <script>
     // 加载车牌键盘
     var plate1 = new Plate("plate");
 
-    // 查询车牌
-    function getplateNumber() {
-      var plateNumber = '';
-      var platesLi = document.querySelector('.plate-frame ul li');
-      for(var i=0; i<platesLi.length; i++) {
-        plateNumber = platesLi.text();
-      }
-      return plateNumber;
-    }
-
     // 查询停车详情的方法
     function queryDetail() {
-      var detail = document.getElementById("detail");                  // 停车详情
-      console.log(getplateNumber());
-      
-      if(getplateNumber().length < 7) {
+      // 获取车牌
+      plate1.inputBox();
+      console.log(plate1.plateNumber);
+      if(plate1.plateNumber.length < 7) {
         alert("请输入正确车牌");
       } else {
         // 点击查询隐藏键盘
