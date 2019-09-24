@@ -11,8 +11,12 @@ function Plate(id) {
 	}
 	// 车牌键盘框索引
 	var plateIndex = _this.plateNumber.length;
-	// this._plate.insertAdjacentHTML('beforeend', cyclicLi(NUM));              		// 将循环的键循环进去
-	init(plateIndex)
+	if(plateIndex < 1) {
+		this._plate.insertAdjacentHTML('beforeend', cyclicLi(PVS));              		// 将循环的键循环进去
+	} else {
+		this._plate.insertAdjacentHTML('beforeend', cyclicLi(NUM));              		// 将循环的键循环进去
+	}
+	// init(plateIndex)
 	this.plateFrame = _this._plate.getElementsByClassName("plate-frame")[0];  	// 车牌键盘框
 	this.plateFrame.innerHTML = placeStrs(plate_umber);												  // 创建车牌键盘框
 	this.plateFrameLi = _this.plateFrame.getElementsByTagName("li");						// 键盘框li
@@ -44,12 +48,9 @@ function Plate(id) {
 		_this.okeyboard.style.display = 'none';
 	}
 	// 点击确定，隐藏键盘
-	// this.shutDown.addEventListener("click", function(event) {
-	// 	_this.hide();
-	// })
-	this.shutDown.onclick = function () {
+	this.shutDown.addEventListener("click", function(event) {
 		_this.hide();
-	}
+	})
 	// init(plateIndex);
 	// 显示地名键盘
 	function showOplaceName() {
