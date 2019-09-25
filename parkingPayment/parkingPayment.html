@@ -11,40 +11,40 @@
 </head>
 
 <body ontouchstart="" οnmοuseοver="">
-
+  <div class="header"></div>
   <!-- 车牌内容 -->
   <div class="keyboard-padding" id="plate" plateNumbers="粤B">
-
     <p>请输入车牌</p>
     <div class="plate">
       <!-- 车牌框 -->
       <div class="plate-frame"></div>
       <!-- 查询按钮 -->
       <div class="plate-button">
-        <a href="javascript:queryDetail();" class="queryDetail">查询停车费</a>
+        <a href="javascript:queryDetail();" class="queryDetail noquery">查询</a>
       </div>
     </div>
-
+    <!-- 车牌键盘框 -->
+    <div class="keyboard">
+      <div class="shut-down"><p>确定</p></div>
+      <div class="place-letter"></div>
+    </div>
   </div>
   <script src="js/plate.js"></script>
   <script>
     // 加载车牌键盘
     var plate1 = new Plate("plate");
-
     // 查询停车详情的方法
     function queryDetail() {
       // 获取车牌
       plate1.inputBox();
       console.log(plate1.plateNumber);
       if(plate1.plateNumber.length < 7) {
-        alert("请输入正确车牌");
+        console.log("请输入正确车牌");
       } else {
         // 点击查询隐藏键盘
         plate1.hide();
       }
     }
-
   </script>
 </body>
-
 </html>

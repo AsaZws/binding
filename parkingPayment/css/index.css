@@ -74,17 +74,21 @@ body {
   position: relative;
   z-index: -2;
 }
-
+.header {
+  background-color: #1E82D2;
+  height: 124px;
+}
 .keyboard-padding {
   padding: 0 14px;
   text-align: center;
+  margin-top: -68px;
 }
 
 .keyboard-padding>p {
   text-align: left;
   font-size: 16px;
   line-height: 36px;
-  color: #333;
+  color: #fff;
 }
 
 .plate {
@@ -122,28 +126,10 @@ body {
   background-size: 80% 80%;
 }
 
-/* 输入框 */
-.plate-input input {
-  width: 100%;
-  padding: 10px 0;
-  font-size: 22px;
-  letter-spacing: 8px;
-  outline: none;
-  border: 1px solid #acacac;
-  border-radius: 6px;
-}
-
-.plate-input input::-webkit-input-placeholder {
-  color: #acacac;
-  font-weight: 100;
-  font-size: 20px;
-}
-
 /* 按钮 */
 .plate-button {
   margin-top: 28px;
 }
-
 .queryDetail {
   display: block;
   width: 100%;
@@ -154,4 +140,9 @@ body {
   background-color: #108de9;
   color: #fff;
   font-size: 16px;
+}
+.queryDetail.noquery {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.5;
 }
