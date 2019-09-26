@@ -8,12 +8,12 @@
 如果想用Vue版本的，请点击这里 => [Vue版](https://github.com/AsaZws/Keyboard)
 
 ### 这种使用起来非常简单，原生的js，是列表框的形式，css用flex布局，适应各种屏幕，具体请看下方
-plateNumbers里面可以自定义车牌初始化，例如渝A   
-base.css是初始化html默认样式的，可以加入你自己项目默认的，需要引入index.css   
-queryDetail查询方法也可以替换   
-plate1.show()显示键盘方法   
-plate1.hide()隐藏键盘方法   
-plate.plateNumber输入的车牌号码
+plateNumbers => 里面可以自定义车牌初始化，例如渝A   
+base.css => 是初始化html默认样式的，可以加入你自己项目默认的，需要引入index.css   
+queryDetail => 查询方法也可以替换   
+plate1.show() => 显示键盘方法   
+plate1.hide() => 隐藏键盘方法   
+plate.plateNumber => 输入的车牌号码
 
 ![](https://github.com/AsaZws/binding/blob/master/images/keyboard.gif)
 - https://github.com/AsaZws/binding/tree/master/parkingPayment
