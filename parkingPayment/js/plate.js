@@ -4,7 +4,7 @@ var PNUM = ['', '', '', '', '', '', '', ''];
 function Plate(id) {
 	var _this = this;                                            						  // 保存this
 	this._plate = document.getElementById(id);                   						  // 获取对象
-	this.plateNumber = this._plate.getAttribute("plateNumbers");						  // 获取自定义属性车牌号码
+	this.plateNumber = this._plate.getAttribute("plateNumbers").split('');		// 获取自定义属性车牌号码数组
 	this.plateIndex = this.plateNumber.length;															  // 车牌键盘框索引
 	this.plateFrame = this._plate.getElementsByClassName("plate-frame")[0];  	// 车牌键盘框
 	this.plateFrameLi = this.plateFrame.getElementsByTagName("li");						// 键盘框li
@@ -45,7 +45,6 @@ Plate.prototype.show = function() {  // 显示键盘
 }
 Plate.prototype.inputBox = function() {  // 遍历车牌键盘，获取车牌
 	var _this = this;
-	this.plateNumber = '';  // 先将车牌清空，后面再累加
 	for(var i=0; i<this.plateFrameLi.length; i++) {
 		this.plateFrameLi[i].index = i;
 		this.plateFrameLi[this.plateIndex].className = "active";
@@ -60,12 +59,6 @@ Plate.prototype.inputBox = function() {  // 遍历车牌键盘，获取车牌
 			}
 			this.className = "active";  // 给点击当前车牌框加class
 			_this.initColor(_this.plateIndex);  // 根据车牌框索引，改变键盘颜色
-		}
-		this.plateNumber += this.plateFrameLi[i].innerHTML;  // 遍历车牌框，获取车牌
-		for(var k=0; k<_this.plateFrameLi.length-1; k++) {   // 如果车牌框输入不连续，则车牌为空
-			if(this.plateFrameLi[k].innerHTML == '') {
-				this.plateNumber = '';
-			}
 		}
 	}
 	if(_this.plateFrameLi[_this.plateFrameLi.length-1].innerHTML !== '') {
@@ -110,20 +103,26 @@ Plate.prototype.keyboard = function() {  // 循环键盘，添加事件
 				}
 			}
 			_this.initColor(_this.plateIndex);  // 根据索引初始化键盘颜色
-			_this.forbidClick();
+			_this.forbidClick();  // 去除禁止点击按钮
 		}
 	}
 }
-Plate.prototype.forbidClick = function() {
-	for (var i = 0; i < this.plateFrameLi.length-1; i++) {
-		var pl = '';
-		if(pl.length < 7) {
-			pl += this.plateFrameLi[i].innerHTML;
-			console.log(pl);
+Plate.prototype.forbidClick = function() {  //去除禁止点击按钮并获取车牌,
+	this.plateNumber.length = 0;  // 获取前先清空
+	for (var i = 0; i < this.plateFrameLi.length; i++) {  // 存车牌
+		if(this.plateNumber.length <= 8 && this.plateFrameLi[i].innerHTML !== '') {
+			this.plateNumber.push(this.plateFrameLi[i].innerHTML)
 		}
-		else if(pl.length > 6) {
-			this.queryDetail.classList.remove("noquery");
+	}
+	for (var j = 0; j < this.plateFrameLi.length-1; j++) {  // 如果前7位车牌有空，则清空车牌
+		if (this.plateFrameLi[j].innerHTML == '') {
+			this.plateNumber.length = 0;
 		}
+	}
+	if(this.plateNumber.length > 6 && this.queryDetail.className.indexOf("noquery") > -1) {
+		this.queryDetail.classList.remove("noquery"); // 车牌长度大于6位，可以点击
+	} else if(this.plateNumber.length < 7 && this.queryDetail.className.indexOf("noquery") <= -1) {
+		this.queryDetail.classList.add("noquery"); // 车牌长度小于7位，并且没有noquery则添加noquery
 	}
 }
 Plate.prototype.showOplaceName = function() {  // 循环显示地名键盘

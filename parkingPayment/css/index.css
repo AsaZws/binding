@@ -1,4 +1,7 @@
-/* 父级基础字号 */
+/* 车牌键盘
+ * AsaZhou
+ * 2019/09/26
+*/
 .keyboard {
   position: fixed;
   bottom: 0;
@@ -66,8 +69,7 @@
   cursor: default;
 }
 
-
-
+/* 车牌框 */
 html,
 body {
   background-color: #f6f6f6;

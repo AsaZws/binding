@@ -36,12 +36,11 @@
     // 查询停车详情的方法
     function queryDetail() {
       // 获取车牌
-      plate1.inputBox();
       console.log(plate1.plateNumber);
       if(plate1.plateNumber.length < 7) {
         console.log("请输入正确车牌");
       } else {
-        // 点击查询隐藏键盘
+        // 隐藏键盘
         plate1.hide();
       }
     }
