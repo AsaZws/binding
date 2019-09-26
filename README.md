@@ -1,13 +1,20 @@
-最新最完美车牌框输入键盘：https://asazws.github.io/binding/parkingPayment/plate.html  
+最新最完美车牌框输入键盘：https://asazws.github.io/binding/parkingPayment/parkingPayment.html  
 车牌最新输入框版：https://asazws.github.io/binding/plate-object/plate.html  
 车牌键盘框：https://asazws.github.io/binding/binding.html
 
 ## 车牌键盘
 我们做智慧停车的，在H5开发一个车牌输入的键盘，下面是效果图，    
-有两种展示方式，当然两种的代码结构不一样，需要哪种就用哪种，代码有累赘的地方希望指出来。    
+有多种展示方式，每种的代码结构不一样，需要哪种就用哪种，单独分开的，代码有累赘的地方希望指出来。    
 如果想用Vue版本的，请点击这里 => [Vue版](https://github.com/AsaZws/Keyboard)
 
-### 这种使用起来非常简单，原生js写的，是列表框的形式，css用flex布局，适应各种屏幕，具体请看下方
+### 这种使用起来非常简单，原生的js，是列表框的形式，css用flex布局，适应各种屏幕，具体请看下方
+plateNumbers里面可以自定义车牌初始化，例如渝A   
+base.css是初始化html默认样式的，可以加入你自己项目默认的，需要引入index.css   
+queryDetail查询方法也可以替换   
+plate1.show()显示键盘方法   
+plate1.hide()隐藏键盘方法   
+plate.plateNumber输入的车牌号码
+
 ![](https://github.com/AsaZws/binding/blob/master/images/keyboard.gif)
 - https://github.com/AsaZws/binding/tree/master/parkingPayment
 
