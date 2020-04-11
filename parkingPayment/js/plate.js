@@ -73,19 +73,17 @@ Plate.prototype.keyboard = function() {  // 循环键盘，添加事件
 		this.placeLetterLi[plength].classList.add("lastli");  // 给最后一个删除加class
 		this.initColor(this.plateIndex);
 		this.placeLetterLi[i].onclick = function () {  // 键点击事件
-			if (this.index < plength) {  // 非删除键
-				if(this.innerHTML !== "") {  // 车牌键非空
-					_this.plateFrameLi[_this.plateIndex].innerHTML = this.innerHTML;  // 取值赋值
-					_this.plateFrameLi[_this.plateIndex].className = "";
-					if(_this.plateIndex == _this.plateFrameLi.length-2) {  // 点击到新能源前一位，索引不变
-						_this.plateIndex = _this.plateFrameLi.length-2;
-					}
-					else if(_this.plateIndex == _this.plateFrameLi.length-1) {  // 点击到新能源，索引不变
-						_this.plateIndex = _this.plateFrameLi.length-1;
-					}
-					else {
-						_this.plateIndex++;  // 其他情况索引累加
-					}
+			if (this.index < plength && this.innerHTML !== "") {  // 非空非删除键
+				_this.plateFrameLi[_this.plateIndex].innerHTML = this.innerHTML;  // 取值赋值
+				_this.plateFrameLi[_this.plateIndex].className = "";
+				if(_this.plateIndex == _this.plateFrameLi.length-2) {  // 点击到新能源前一位，索引不变
+					_this.plateIndex = _this.plateFrameLi.length-2;
+				}
+				else if(_this.plateIndex == _this.plateFrameLi.length-1) {  // 点击到新能源，索引不变
+					_this.plateIndex = _this.plateFrameLi.length-1;
+				}
+				else {
+					_this.plateIndex++;  // 其他情况索引累加
 				}
 				_this.plateFrameLi[_this.plateIndex].className = "active";  // 当前添加class
 			} else if (this.index == plength) {  // 当点击删除
