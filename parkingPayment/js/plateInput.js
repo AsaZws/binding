@@ -99,9 +99,10 @@ PlateInput.prototype.showPlaceLetter = function() {
 }
 // 初始化背景颜色
 PlateInput.prototype.initColor = function(index) {
+    var pLength = this.placeLetterLi.length;
 	if(index == 0) {
 		this.showOplaceName()
-		for (var i = 0; i < this.placeLetterLi.length; i++) {
+		for (var i = 0; i < pLength; i++) {
 			clear(this.placeLetterLi, i);
 		}
 		for (var i = 31; i < 38; i++) {
@@ -110,7 +111,7 @@ PlateInput.prototype.initColor = function(index) {
 	}
 	else if (index == 1) {
 		this.showPlaceLetter();
-		for (var i = 0; i < this.placeLetterLi.length; i++) {
+		for (var i = 0; i < pLength; i++) {
 			clear(this.placeLetterLi, i);
 		}
 		bannedClick(this.placeLetterLi, 18);
@@ -133,13 +134,13 @@ PlateInput.prototype.initColor = function(index) {
 	}
 	else if (index == 6) {
 		this.showPlaceLetter();
-		for (var i = 0; i < this.placeLetterLi.length; i++) {
+		for (var i = 0; i < pLength; i++) {
 			clear(this.placeLetterLi, i);
 		}
 	}
 	else if (index == 7) {
 		this.showPlaceLetter();
-		for (var i = 0; i < this.placeLetterLi.length; i++) {
+		for (var i = 0; i < pLength; i++) {
 			clear(this.placeLetterLi, i);
 		}
 		bannedClick(this.placeLetterLi, 18);
