@@ -1,8 +1,20 @@
-var PVS = ['京', '津', '沪', '渝', '蒙', '新', '藏', '宁', '桂', '黑', '吉', '辽', '晋', '冀', '青', '鲁', '豫', '苏', '皖', '浙', '闽', '赣', '湘', '鄂', '琼', '甘', '陕', '粤', '云', '贵', '川', '', '', '', '', '', '', '', '<span>x</span>'];
-var NUM = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'P', '港', '澳', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', '学', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '警', '<span>x</span>'];
-var PNUM = ['', '', '', '', '', '', '', ''];
+/**
+ * 1.保存this
+ * 2.获取对象
+ * 3.获取自定义的车牌
+ * 4.获取输入框的id
+ * 5.获取键盘的id
+ * 6.获取关闭的id
+ * 7.初始化键盘
+ * 8.关闭键盘事件
+ * 9.打开键盘事件
+ * 车牌数字键盘 name：Asa_Zhou data：2020/04/13修改完成
+ */
 function Plate(id) {
 	var _this = this;                                            						  // 保存this
+	this.PVS = ['京', '津', '沪', '渝', '蒙', '新', '藏', '宁', '桂', '黑', '吉', '辽', '晋', '冀', '青', '鲁', '豫', '苏', '皖', '浙', '闽', '赣', '湘', '鄂', '琼', '甘', '陕', '粤', '云', '贵', '川', '', '', '', '', '', '', '', '<span>x</span>'];
+	this.NUM = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'P', '港', '澳', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', '学', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '警', '<span>x</span>'];
+	this.PNUM = ['', '', '', '', '', '', '', ''];
 	this._plate = document.getElementById(id);                   						  // 获取对象
 	this.plateNumber = this._plate.getAttribute("plateNumbers").split('');		// 获取自定义属性车牌号码数组
 	this.plateIndex = this.plateNumber.length;															  // 车牌键盘框索引
@@ -26,15 +38,15 @@ function Plate(id) {
 }
 Plate.prototype.initInput = function() {  // 初始化车牌框
 	for(var i=0; i<this.plateNumber.length; i++) {
-		PNUM[i] = this.plateNumber[i];
+		this.PNUM[i] = this.plateNumber[i];
 	}
-	this.plateFrame.innerHTML = placeStrs(PNUM);  // 将html自定义的车牌初始值赋给车牌框
+	this.plateFrame.innerHTML = placeStrs(this.PNUM);  // 将html自定义的车牌初始值赋给车牌框
 }
 Plate.prototype.initShow = function(index) {    // 初始化显示键盘
 	if(index == 0) {
-		this.placeLetter.innerHTML = placeStrs(PVS);
+		this.placeLetter.innerHTML = placeStrs(this.PVS);
 	} else {
-		this.placeLetter.innerHTML = placeStrs(NUM);
+		this.placeLetter.innerHTML = placeStrs(this.NUM);
 	}
 }
 Plate.prototype.hide = function() {  // 隐藏键盘
@@ -78,9 +90,11 @@ Plate.prototype.keyboard = function() {  // 循环键盘，添加事件
 				_this.plateFrameLi[_this.plateIndex].className = "";
 				if(_this.plateIndex == _this.plateFrameLi.length-2) {  // 点击到新能源前一位，索引不变
 					_this.plateIndex = _this.plateFrameLi.length-2;
+					_this.hide();
 				}
 				else if(_this.plateIndex == _this.plateFrameLi.length-1) {  // 点击到新能源，索引不变
 					_this.plateIndex = _this.plateFrameLi.length-1;
+					_this.hide();
 				}
 				else {
 					_this.plateIndex++;  // 其他情况索引累加
@@ -125,18 +139,19 @@ Plate.prototype.forbidClick = function() {  //去除禁止点击按钮并获取�
 }
 Plate.prototype.showOplaceName = function() {  // 循环显示地名键盘
 	for (var i = 0; i < this.placeLetterLi.length; i++) {
-		this.placeLetterLi[i].innerHTML = PVS[i];
+		this.placeLetterLi[i].innerHTML = this.PVS[i];
 	}
 }
 Plate.prototype.showPlaceLetter = function() {  // 循环显示数字键盘
 	for (var i = 0; i < this.placeLetterLi.length; i++) {
-		this.placeLetterLi[i].innerHTML = NUM[i];
+		this.placeLetterLi[i].innerHTML = this.NUM[i];
 	}
 }
 Plate.prototype.initColor = function(index) {  // 初始化背景颜色
+	var pLength = this.placeLetterLi.length;
 	if(index == 0) {
 		this.showOplaceName()
-		for (var i = 0; i < this.placeLetterLi.length; i++) {
+		for (var i = 0; i < pLength; i++) {
 			clear(this.placeLetterLi, i);
 		}
 		for (var i = 31; i < 38; i++) {
@@ -145,7 +160,7 @@ Plate.prototype.initColor = function(index) {  // 初始化背景颜色
 	}
 	else if (index == 1) {
 		this.showPlaceLetter();
-		for (var i = 0; i < this.placeLetterLi.length; i++) {
+		for (var i = 0; i < pLength; i++) {
 			clear(this.placeLetterLi, i);
 		}
 		bannedClick(this.placeLetterLi, 18);
@@ -168,13 +183,13 @@ Plate.prototype.initColor = function(index) {  // 初始化背景颜色
 	}
 	else if (index == 6) {
 		this.showPlaceLetter();
-		for (var i = 0; i < this.placeLetterLi.length; i++) {
+		for (var i = 0; i < pLength; i++) {
 			clear(this.placeLetterLi, i);
 		}
 	}
 	else if (index == 7) {
 		this.showPlaceLetter();
-		for (var i = 0; i < this.placeLetterLi.length; i++) {
+		for (var i = 0; i < pLength; i++) {
 			clear(this.placeLetterLi, i);
 		}
 		bannedClick(this.placeLetterLi, 18);

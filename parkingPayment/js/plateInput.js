@@ -8,23 +8,23 @@
  * 7.初始化键盘
  * 8.关闭键盘事件
  * 9.打开键盘事件
- * 车牌数字键盘 name：Asa_Zhou data：2020/04/11修改完成
+ * 车牌数字键盘 name：Asa_Zhou data：2020/04/13修改完成
  */
 function PlateInput(id) {
-    var _this = this;
-    this.PVS = ['京', '津', '沪', '渝', '蒙', '新', '藏', '宁', '桂', '黑', '吉', '辽', '晋', '冀', '青', '鲁', '豫', '苏', '皖', '浙', '闽', '赣', '湘', '鄂', '琼', '甘', '陕', '粤', '云', '贵', '川', '', '', '', '', '', '', '', '<span>x</span>'];
-    this.NUM = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'P', '港', '澳', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', '学', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '警', '<span>x</span>'];
-    this._plate = document.getElementById(id);
-    this.plateValue = this._plate.getElementsByTagName("input")[0];
-    this.plateNumber = this.plateValue.value; // 初始化车牌号码
+	var _this = this;
+	this.PVS = ['京', '津', '沪', '渝', '蒙', '新', '藏', '宁', '桂', '黑', '吉', '辽', '晋', '冀', '青', '鲁', '豫', '苏', '皖', '浙', '闽', '赣', '湘', '鄂', '琼', '甘', '陕', '粤', '云', '贵', '川', '', '', '', '', '', '', '', '<span>x</span>'];
+	this.NUM = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'P', '港', '澳', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', '学', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '警', '<span>x</span>'];
+	this._plate = document.getElementById(id);
+	this.plateValue = this._plate.getElementsByTagName("input")[0];
+	this.plateNumber = this.plateValue.value; // 初始化车牌号码
 	this.okeyboard = this._plate.getElementsByClassName('keyboard')[0];       // 渲染完成获取键盘
 	this.placeLetter = this._plate.getElementsByClassName('place-letter')[0]; // 获取键盘
-    this.placeLetterLi = this.placeLetter.getElementsByTagName('li');         // 获取键盘li
-    this.shutDown = this._plate.getElementsByClassName('shut-down')[0];       // 获取关闭
-    this.initShow(this.plateNumber.length); // 初始化键盘
-    this.keyboard();  // 键盘事件
-    this.shutDown.addEventListener("click", function() {											// 点击确定，隐藏键盘
-		_this.hide();
+	this.placeLetterLi = this.placeLetter.getElementsByTagName('li');         // 获取键盘li
+	this.shutDown = this._plate.getElementsByClassName('shut-down')[0];       // 获取关闭
+	this.initShow(this.plateNumber.length); // 初始化键盘
+	this.keyboard();  // 键盘事件
+	this.shutDown.addEventListener("click", function() {											// 点击确定，隐藏键盘
+	_this.hide();
 	})
 	this.plateValue.addEventListener("click", function() {										// 点击车牌框，显示键盘
 		_this.show();
@@ -99,7 +99,7 @@ PlateInput.prototype.showPlaceLetter = function() {
 }
 // 初始化背景颜色
 PlateInput.prototype.initColor = function(index) {
-    var pLength = this.placeLetterLi.length;
+  var pLength = this.placeLetterLi.length;
 	if(index == 0) {
 		this.showOplaceName()
 		for (var i = 0; i < pLength; i++) {
