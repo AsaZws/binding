@@ -5,24 +5,22 @@
 	var PNUM = ['', '', '', '', '', '', '', ''];
 
 	function Plate(p) {
-		var _self = this;
-		_self._plate = doc.querySelector(p.id);
+		this._plate = doc.querySelector(p.id);
 		// 获取自定义初始车牌数组
-		_self.plateNumber = p.initPlateNumber.split('');
+		this.plateNumber = p.initPlateNumber.split('');
 		// 获取车牌框初始索引
-		_self.plateIndex = _self.plateNumber.length;
-		_self.isShow = p.isShow;
-		console.log(_self.__proto__.init);
-		_self.__proto__.init();
+		this.plateIndex = this.plateNumber.length;
+		this.isShow = p.isShow;
+		// console.log(this.__proto__.init);
+		// this.__proto__.init();
 	}
 
 	Plate.prototype = {
 		init: function () {
-			var _self = this;
-			_self.initHtml();
-			_self.bindEvent();
-			_self.keyboardEvent();
-			_self.isShow ? this.show() : this.hide();
+			this.initHtml();
+			this.bindEvent();
+			this.keyboardEvent();
+			this.isShow ? this.show() : this.hide();
 		},
 		initHtml: function () {
 			var _self = this;
@@ -94,7 +92,7 @@
 						this.className = "active";
 						_self.showOplaceName();
 						// 根据车牌框索引，改变键盘颜色
-						// _this.initColor(_this.plateIndex);
+						_self.initColor(_self.plateIndex);
 					}
 				}
 			}
@@ -105,6 +103,7 @@
 			var len = this.placeLetterLi.length;
 			// 最后一个添加class
 			_self.placeLetterLi[len-1].classList.add("lastli");
+			_self.initColor(_self.plateIndex);
 			for (var i = 0; i < len; i++) {
 				_self.placeLetterLi[i].index = i;
 				_self.showPlaceLetter();
@@ -149,15 +148,96 @@
 							_self.plateFrameLi[_self.plateFrameLi.length-1].className = "new";
 						}
 					}
-					_self.showPlaceLetter();
+					// 根据索引初始化键盘颜色
+					_self.initColor(_self.plateIndex);
+					// 去除禁止点击按钮
+					_self.forbidClick();
 				}
 			}
 		},
+		initColor: function (index) {
+			var len = this.placeLetterLi.length;
+			if(index == 0) {
+				this.showOplaceName()
+				for (var i = 0; i < len; i++) {
+					clear(this.placeLetterLi, i);
+				}
+				for (var i = 31; i < 38; i++) {
+					bannedClick(this.placeLetterLi, i);
+				}
+			}
+			else if (index == 1) {
+				this.showPlaceLetter();
+				for (var i = 0; i < len; i++) {
+					clear(this.placeLetterLi, i);
+				}
+				bannedClick(this.placeLetterLi, 18);
+				bannedClick(this.placeLetterLi, 19);
+				bannedClick(this.placeLetterLi, 29);
+				bannedClick(this.placeLetterLi, 37);
+				for (var j = 0; j < 10; j++) {
+					bannedClick(this.placeLetterLi, j);
+				}
+			}
+			else if (index > 1 && index < 6) {
+				this.showPlaceLetter();
+				bannedClick(this.placeLetterLi, 18);
+				bannedClick(this.placeLetterLi, 19);
+				bannedClick(this.placeLetterLi, 29);
+				bannedClick(this.placeLetterLi, 37);
+				for (var k = 0; k < 10; k++) {
+					clear(this.placeLetterLi, k);
+				}
+			}
+			else if (index == 6) {
+				this.showPlaceLetter();
+				for (var i = 0; i < len; i++) {
+					clear(this.placeLetterLi, i);
+				}
+			}
+			else if (index == 7) {
+				this.showPlaceLetter();
+				for (var i = 0; i < len; i++) {
+					clear(this.placeLetterLi, i);
+				}
+				bannedClick(this.placeLetterLi, 18);
+				bannedClick(this.placeLetterLi, 19);
+				bannedClick(this.placeLetterLi, 29);
+				bannedClick(this.placeLetterLi, 37);
+			}
+		},
+		forbidClick: function () {
+			// 获取前先清空
+			var len = this.plateNumber.length = 0;
+			console.log(len);
+			// 存车牌
+			for (var i = 0; i < this.plateFrameLi.length; i++) {
+				if(len <= 8 && this.plateFrameLi[i].innerHTML !== '') {
+					this.plateNumber.push(this.plateFrameLi[i].innerHTML)
+				}
+			}
+			// 如果前7位车牌有空，则清空车牌
+			for (var j = 0; j < this.plateFrameLi.length-1; j++) {
+				if (this.plateFrameLi[j].innerHTML == '') {
+					len = 0;
+				}
+			}
+			// 车牌长度大于6位，可以点击
+			if(len > 6 && this.queryDetail.className.indexOf("noquery") > -1) {
+				this.queryDetail.classList.remove("noquery");
+			}
+			// 车牌长度小于7位，并且没有noquery则添加noquery
+			else if(len < 7 && this.queryDetail.className.indexOf("noquery") <= -1) {
+				this.queryDetail.classList.add("noquery");
+			}
+		},
+		// 循环车牌简称
 		showOplaceName: function () {
 			for (var i = 0; i < this.placeLetterLi.length; i++) {
 				this.placeLetterLi[i].innerHTML = PVS[i];
 			}
 		},
+		// 循环车牌字母数字
 		showPlaceLetter: function () {
 			for (var i = 0; i < this.placeLetterLi.length; i++) {
 				this.placeLetterLi[i].innerHTML = NUM[i];
@@ -173,147 +253,15 @@
 		}
 		return placeStr = '<ul>' + placeStr + '</ul>';
 	}
+	// 清除背景颜色，可以点击
+	function clear(id, num) {
+		id[num].classList.remove("place-color");
+	}
+	// 添加背景颜色,禁止点击
+	function bannedClick(id, item) {
+		id[item].classList.add("place-color");
+	}
 
 	win.Plate = Plate;
 
  })(window, document);
- 
-// function Plate(id) {															  // 车牌键盘框索引
-// 	this.inputBox();																													// 初始化车牌框
-// 	this.keyboard();																													// 循环数字键盘
-// }
-
-// Plate.prototype.keyboard = function() {  // 循环键盘，添加事件
-// 	var _this = this;
-// 	for (var i = 0; i < this.placeLetterLi.length; i++) {
-// 		this.placeLetterLi[i].index = i;
-// 		var plength = this.placeLetterLi.length - 1;
-// 		this.placeLetterLi[plength].classList.add("lastli");  // 给最后一个删除加class
-// 		this.initColor(this.plateIndex);
-// 		this.placeLetterLi[i].onclick = function () {  // 键点击事件
-// 			if (this.index < plength && this.innerHTML !== "") {  // 非空非删除键
-// 				_this.plateFrameLi[_this.plateIndex].innerHTML = this.innerHTML;  // 取值赋值
-// 				_this.plateFrameLi[_this.plateIndex].className = "";
-// 				if(_this.plateIndex == _this.plateFrameLi.length-2) {  // 点击到新能源前一位，索引不变
-// 					_this.plateIndex = _this.plateFrameLi.length-2;
-// 					_this.hide();
-// 				}
-// 				else if(_this.plateIndex == _this.plateFrameLi.length-1) {  // 点击到新能源，索引不变
-// 					_this.plateIndex = _this.plateFrameLi.length-1;
-// 					_this.hide();
-// 				}
-// 				else {
-// 					_this.plateIndex++;  // 其他情况索引累加
-// 				}
-// 				_this.plateFrameLi[_this.plateIndex].className = "active";  // 当前添加class
-// 			} else if (this.index == plength) {  // 当点击删除
-// 				_this.plateFrameLi[_this.plateIndex].innerHTML = "";
-// 				_this.plateFrameLi[_this.plateIndex].className = "";
-// 				if(_this.plateIndex == 1 || _this.plateIndex == 0) {  // 删除到最后一个的时候，索引不变
-// 					_this.plateIndex = 0;
-// 				}
-// 				else {
-// 					_this.plateIndex--;  // 索引累减
-// 				}
-// 				_this.plateFrameLi[_this.plateIndex].className = "active";  // 当前添加class
-// 				if(_this.plateFrameLi[_this.plateFrameLi.length-1].innerHTML == '') {  // 车牌框最后一个为空的时候，添加新能源class
-// 					_this.plateFrameLi[_this.plateFrameLi.length-1].className = "new";
-// 				}
-// 			}
-// 			_this.initColor(_this.plateIndex);  // 根据索引初始化键盘颜色
-// 			_this.forbidClick();  // 去除禁止点击按钮
-// 		}
-// 	}
-// }
-// Plate.prototype.forbidClick = function() {  //去除禁止点击按钮并获取车牌,
-// 	this.plateNumber.length = 0;  // 获取前先清空
-// 	for (var i = 0; i < this.plateFrameLi.length; i++) {  // 存车牌
-// 		if(this.plateNumber.length <= 8 && this.plateFrameLi[i].innerHTML !== '') {
-// 			this.plateNumber.push(this.plateFrameLi[i].innerHTML)
-// 		}
-// 	}
-// 	for (var j = 0; j < this.plateFrameLi.length-1; j++) {  // 如果前7位车牌有空，则清空车牌
-// 		if (this.plateFrameLi[j].innerHTML == '') {
-// 			this.plateNumber.length = 0;
-// 		}
-// 	}
-// 	if(this.plateNumber.length > 6 && this.queryDetail.className.indexOf("noquery") > -1) {
-// 		this.queryDetail.classList.remove("noquery"); // 车牌长度大于6位，可以点击
-// 	} else if(this.plateNumber.length < 7 && this.queryDetail.className.indexOf("noquery") <= -1) {
-// 		this.queryDetail.classList.add("noquery"); // 车牌长度小于7位，并且没有noquery则添加noquery
-// 	}
-// }
-// Plate.prototype.showOplaceName = function() {  // 循环显示地名键盘
-// 	for (var i = 0; i < this.placeLetterLi.length; i++) {
-// 		this.placeLetterLi[i].innerHTML = this.PVS[i];
-// 	}
-// }
-// Plate.prototype.showPlaceLetter = function() {  // 循环显示数字键盘
-// 	for (var i = 0; i < this.placeLetterLi.length; i++) {
-// 		this.placeLetterLi[i].innerHTML = this.NUM[i];
-// 	}
-// }
-// Plate.prototype.initColor = function(index) {  // 初始化背景颜色
-// 	var pLength = this.placeLetterLi.length;
-// 	if(index == 0) {
-// 		this.showOplaceName()
-// 		for (var i = 0; i < pLength; i++) {
-// 			clear(this.placeLetterLi, i);
-// 		}
-// 		for (var i = 31; i < 38; i++) {
-// 			bannedClick(this.placeLetterLi, i);
-// 		}
-// 	}
-// 	else if (index == 1) {
-// 		this.showPlaceLetter();
-// 		for (var i = 0; i < pLength; i++) {
-// 			clear(this.placeLetterLi, i);
-// 		}
-// 		bannedClick(this.placeLetterLi, 18);
-// 		bannedClick(this.placeLetterLi, 19);
-// 		bannedClick(this.placeLetterLi, 29);
-// 		bannedClick(this.placeLetterLi, 37);
-// 		for (var j = 0; j < 10; j++) {
-// 			bannedClick(this.placeLetterLi, j);
-// 		}
-// 	}
-// 	else if (index > 1 && index < 6) {
-// 		this.showPlaceLetter();
-// 		bannedClick(this.placeLetterLi, 18);
-// 		bannedClick(this.placeLetterLi, 19);
-// 		bannedClick(this.placeLetterLi, 29);
-// 		bannedClick(this.placeLetterLi, 37);
-// 		for (var k = 0; k < 10; k++) {
-// 			clear(this.placeLetterLi, k);
-// 		}
-// 	}
-// 	else if (index == 6) {
-// 		this.showPlaceLetter();
-// 		for (var i = 0; i < pLength; i++) {
-// 			clear(this.placeLetterLi, i);
-// 		}
-// 	}
-// 	else if (index == 7) {
-// 		this.showPlaceLetter();
-// 		for (var i = 0; i < pLength; i++) {
-// 			clear(this.placeLetterLi, i);
-// 		}
-// 		bannedClick(this.placeLetterLi, 18);
-// 		bannedClick(this.placeLetterLi, 19);
-// 		bannedClick(this.placeLetterLi, 29);
-// 		bannedClick(this.placeLetterLi, 37);
-// 	}
-// }
-// function placeStrs(arr) {  // 返回ul结构
-// 	var placeStr = '';
-// 	for (var i in arr) {
-// 		placeStr += '<li>' + arr[i] + '</li>';
-// 	}
-// 	return placeStr = '<ul>' + placeStr + '</ul>';
-// }
-// function bannedClick(id, item) {  // 添加背景颜色,禁止点击
-// 	id[item].classList.add("place-color");
-// }
-// function clear(id, num) {  // 清除背景颜色，可以点击
-// 	id[num].classList.remove("place-color");
-// }
